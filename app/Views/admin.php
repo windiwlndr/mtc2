@@ -31,7 +31,7 @@
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <button class="btn btn-success"><i class="fas fa-plus"></i> Tambah</button>
                             <div class="btn-group">
-                                <button class="btn btn-light"><i class="fas fa-filter"></i></button>
+                                <button class="btn btn-light"><i class="fas fa-chevron-down"></i></button>
                                 <button class="btn btn-light"><i class="fas fa-sync-alt"></i></button>
                                 <button class="btn btn-light"><i class="fas fa-times"></i></button>
                             </div>
