@@ -67,30 +67,20 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Admin Satu</td>
-                                            <td>admin1@gmail.com</td>
-                                            <td>Super Admin</td>
-                                            <td>2024-02-09 12:34:20</td>
-                                            <td><img src="assets/images/faces/2.jpg" class="rounded-circle" alt="Foto" width="50" height="50"></td>
-                                            <td>
-                                                <button class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></button>
-                                                <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Admin Dua</td>
-                                            <td>admin2@gmail.com</td>
-                                            <td>Admin</td>
-                                            <td>2024-02-08 12:34:25</td>
-                                            <td><img src="assets/images/faces/3.jpg" class="rounded-circle" alt="Foto" width="50" height="50"></td>
-                                            <td>
-                                                <button class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></button>
-                                                <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
-                                            </td>
-                                        </tr>
+                                        <?php foreach ($user as $admin) : ?>
+                                            <tr>
+                                                <td><?= $admin['id_user']; ?></td>
+                                                <td><?= $admin['nama']; ?></td>
+                                                <td><?= $admin['username']; ?></td>
+                                                <td><?= $admin['level']; ?></td>
+                                                <td><?= $admin['created_at']; ?></td>
+                                                <td><img src="<?= $admin['foto']; ?>" class="rounded-circle" alt="Foto" width="50" height="50"></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></button>
+                                                    <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
                                         <!-- Tambahkan data lain di sini -->
                                     </tbody>
                                 </table>
