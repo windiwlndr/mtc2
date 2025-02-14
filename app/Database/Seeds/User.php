@@ -16,7 +16,7 @@ class User extends Seeder
                 'email' => 'manager@gmail.com',
                 'status' => 'aktif',
                 'level' => '1',
-                'foto' => 'assets/faces/1.jpg',
+                'foto' => 'assets/images/faces/1.jpg',
                 'created_at' => date('Y-m-d H:i:s'),
             ],
             [
@@ -26,7 +26,7 @@ class User extends Seeder
                 'email' => 'admin@gmail.com',
                 'status' => 'aktif',
                 'level' => '2',
-                'foto' => 'assets/faces/3.jpg',
+                'foto' => 'assets/images/faces/3.jpg',
                 'created_at' => date('Y-m-d H:i:s'),
                 // 'updated_at' => date('Y-m-d H:i:s'),
             ],
@@ -37,7 +37,7 @@ class User extends Seeder
                 'email' => 'kasir@mail.com',
                 'status' => 'aktif',
                 'level' => '3',
-                'foto' => 'assets/faces/2.jpg',
+                'foto' => 'assets/images/faces/2.jpg',
                 'created_at' => date('Y-m-d H:i:s'),
             ],
         ];

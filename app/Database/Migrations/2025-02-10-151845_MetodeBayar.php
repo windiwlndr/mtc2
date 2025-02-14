@@ -21,11 +21,11 @@ class MetodeBayar extends Migration
             ],
         ]);
         $this->forge->addPrimaryKey('id_metode_bayar');
-        $this->forge->createTable('Tb_metode_bayar');
+        $this->forge->createTable('tb_metode_bayar');
     }
 
     public function down()
     {
-        $this->forge->dropTable('Tb_metode_bayar');
+        $this->forge->dropTable('tb_metode_bayar');
     }
 }

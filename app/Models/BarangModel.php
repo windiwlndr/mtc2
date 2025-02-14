@@ -32,4 +32,11 @@ class BarangModel extends Model
         'rak_barang',
         'tab_rak'
     ];
+
+    public function getBarang()
+    {
+        return $this->select('tb_barang.*, tb_merk.nama_merk as merk')
+                    ->join('tb_merk', 'tb_barang.id_merk = tb_merk.id_merk', 'left')
+                    ->findAll();
+    }
 }

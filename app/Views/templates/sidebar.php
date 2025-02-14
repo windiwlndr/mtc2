@@ -24,33 +24,33 @@
                         <li class="submenu-item">
                             <a href="component-alert.html"><i class="fa-solid fa-cogs"></i> Pengaturan Toko</a>
                         </li>
-                        <li class="submenu-item">
+                        <!-- <li class="submenu-item">
                             <a href="component-badge.html"><i class="fa-solid fa-user"></i> Member</a>
+                        </li> -->
+                        <li class="submenu-item">
+                            <a href="<?= base_url('/supplier'); ?>"><i class="fa-solid fa-truck"></i> Supplier</a>
                         </li>
                         <li class="submenu-item">
-                            <a href="component-breadcrumb.html"><i class="fa-solid fa-truck"></i> Supplier</a>
+                            <a href="<?= base_url('/barang'); ?>"><i class="fa-solid fa-box"></i> Barang</a>
                         </li>
                         <li class="submenu-item">
-                            <a href="component-button.html"><i class="fa-solid fa-box"></i> Barang</a>
+                            <a href="<?= base_url('/satuan'); ?>"><i class="fa-solid fa-ruler"></i> Satuan</a>
                         </li>
                         <li class="submenu-item">
-                            <a href="component-card.html"><i class="fa-solid fa-ruler"></i> Satuan</a>
+                            <a href="<?= base_url('/kategori'); ?>"><i class="fa-solid fa-tags"></i> Kategori</a>
                         </li>
                         <li class="submenu-item">
-                            <a href="component-carousel.html"><i class="fa-solid fa-tags"></i> Kategori</a>
+                            <a href="<?= base_url('/merk'); ?>"><i class="fa-solid fa-copyright"></i> Merk</a>
                         </li>
                         <li class="submenu-item">
-                            <a href="component-dropdown.html"><i class="fa-solid fa-copyright"></i> Merk</a>
+                            <a href="<?= base_url('/metode_bayar'); ?>"><i class="fa-solid fa-credit-card"></i> Metode Bayar</a>
                         </li>
                         <li class="submenu-item">
-                            <a href="component-list-group.html"><i class="fa-solid fa-credit-card"></i> Metode Bayar</a>
+                            <a href="<?= base_url('/user'); ?>"><i class="fa-solid fa-user-shield"></i> User</a>
                         </li>
-                        <li class="submenu-item">
-                            <a href="<?= base_url('/admin'); ?>"><i class="fa-solid fa-user-shield"></i> Admin</a>
-                        </li>
-                        <li class="submenu-item">
+                        <!-- <li class="submenu-item">
                             <a href="component-navs.html"><i class="fa-solid fa-users"></i> Karyawan</a>
-                        </li>
+                        </li> -->
                     </ul>
                 </li>
             </ul>
