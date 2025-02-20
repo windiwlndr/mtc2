@@ -3,6 +3,7 @@
 namespace App\Database\Seeds;
 
 use CodeIgniter\Database\Seeder;
+use CodeIgniter\I18n\Time;
 
 class Barang extends Seeder
 {
@@ -31,7 +32,8 @@ class Barang extends Seeder
                 'tgl_entri_awal' => date('Y-m-d H:i:s'),
                 'foto' => 'beras.jpg',
                 'rak_barang' => 'Rak A1',
-                'tab_rak' => 'Tab 1'
+                'tab_rak' => 'Tab 1',
+                'created_at' => Time::now('Asia/Jakarta', 'Y-m-d H:i:s'),
             ],
             [
                 'barcode' => '987654321098',
@@ -55,7 +57,8 @@ class Barang extends Seeder
                 'tgl_entri_awal' => date('Y-m-d H:i:s'),
                 'foto' => 'gula.jpg',
                 'rak_barang' => 'Rak B2',
-                'tab_rak' => 'Tab 2'
+                'tab_rak' => 'Tab 2',
+                'created_at' => Time::now('Asia/Jakarta', 'Y-m-d H:i:s'),
             ]
         ];
 

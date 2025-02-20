@@ -9,4 +9,9 @@ class MerkModel extends Model
     protected $table = 'tb_merk';
     protected $primaryKey = 'id_merk';
     protected $allowedFields = ['nama_merk', 'link_merk'];
+
+    public function updateMerk($id, $data)
+    {
+        return $this->update($id, $data);
+    }
 }

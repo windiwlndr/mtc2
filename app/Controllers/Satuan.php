@@ -16,45 +16,62 @@ class Satuan extends Controller
 
     public function index()
     {
-        $data['satuan'] = $this->satuanModel->findAll();
+        $data = [
+            'title' => 'Kasir || Data Satuan',
+            'satuan' => $this->satuanModel->findAll()
+        ];
         return view('satuan', $data);
 
     }
 
+
     public function create()
     {
-        return view('satuan/create');
-    }
+        $satuan = $this->request->getPost('link_satuan');
 
-    public function store()
-    {
-        $this->satuanModel->save([
+        $data = [
             'nama_satuan' => $this->request->getPost('nama_satuan'),
-            'link_satuan' => $this->request->getPost('link_satuan'),
-        ]);
+            'link_satuan' => url_title(strtolower($satuan)),
+        ];
 
-        return redirect()->to('/satuan');
+        if ($this->satuanModel->save($data)) {
+            session()->setFlashdata('success', 'Data berhasil ditambahkan!');
+        } else {
+            session()->setFlashdata('error', 'Gagal menambahkan data.');
+        }
+
+        return redirect()->to(base_url('/satuan'));
     }
 
-    public function edit($id)
+    public function update()
     {
-        $data['satuan'] = $this->satuanModel->find($id);
-        return view('satuan/edit', $data);
-    }
-
-    public function update($id)
-    {
-        $this->satuanModel->update($id, [
+        $satuan = $this->request->getPost('link_satuan');
+        $id = $this->request->getPost('id_satuan');
+        $data = [
             'nama_satuan' => $this->request->getPost('nama_satuan'),
-            'link_satuan' => $this->request->getPost('link_satuan'),
-        ]);
+            'link_satuan' => url_title(strtolower($satuan)),
+        ];
 
-        return redirect()->to('/satuan');
+        if ($this->satuanModel->updateSatuan($id, $data)) {
+            session()->setFlashdata('success', 'Data berhasil diperbarui!');
+            return redirect()->to(base_url('/satuan'));
+        } else {
+            session()->setFlashdata('error', 'Gagal memperbarui data.');
+            return redirect()->to(base_url('/'));
+        }
     }
 
-    public function delete($id)
+    public function delete()
     {
-        $this->satuanModel->delete($id);
-        return redirect()->to('/satuan');
+        $id = $this->request->getPost('id_satuan');
+
+        if ($this->satuanModel->find($id)) {
+            $this->satuanModel->delete($id);
+            session()->setFlashdata('success', 'Data berhasil dihapus!');
+        } else {
+            session()->setFlashdata('error', 'Gagal menghapus data! Data tidak ditemukan.');
+        }
+
+        return redirect()->to(base_url('/satuan'));
     }
 }

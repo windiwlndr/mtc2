@@ -109,6 +109,10 @@ class CreateTbBarang extends Migration
                 'constraint' => 100,
                 'null'       => true,
             ],
+            'created_at' => [
+                'type' => 'DATETIME',
+                'null' => true,
+            ],
         ]);
 
         $this->forge->addPrimaryKey('id_barang');

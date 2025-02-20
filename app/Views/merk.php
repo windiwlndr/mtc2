@@ -62,9 +62,48 @@
                                                 <td><?= $item['id_merk'] ?></td>
                                                 <td><?= $item['nama_merk'] ?></td>
                                                 <td>
-                                                    <button class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></button>
-                                                    <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                                                    <div class="row">
+                                                        <div class="col-4">
+                                                            <div class="form-button-action">
+                                                                <button type="button" data-bs-toggle="modal" data-bs-target="#detailModal<?= $item['id_merk'] ?>" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i> Edit</button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <div class="form-button-action">
+                                                                <form action="<?= base_url('/deleteMerk'); ?>" method="post">
+                                                                    <input type="hidden" name="id_merk" value="<?= $item['id_merk']; ?>">
+                                                                    <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i>Hapus</button>
+                                                                </form>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </td>
+                                                <!-- Modal update merk -->
+                                                <div class="modal fade" id="detailModal<?= $item['id_merk'] ?>" aria-labelledby="detailModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="detailModalLabel">Edit Data Merk</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <form action="<?= base_url('/updateMerk'); ?>" method="post">
+                                                                <input type="hidden" class="form-control" id="id_merk" name="id_merk" value="<?= $item['id_merk'] ?>">
+                                                                <div class="modal-body">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Nama Merk</label>
+                                                                        <input type="text" name="nama_merk" class="form-control" value="<?= $item['nama_merk'] ?>" required>
+                                                                    </div>
+                                                                </div>
+                                                                <input type="hidden" class="form-control" id="link_merk" name="link_merk" value="<?= $item['link_merk'] ?>">
+                                                                <div class="modal-footer">
+                                                                    <button type="submit" class="btn btn-primary">Simpan</button>
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </tr>
                                         <?php endforeach; ?>
                                     </tbody>
@@ -85,7 +124,7 @@
                         <h5 class="modal-title" id="modalTambahMerkLabel">Tambah Data Merk</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="<?= base_url('merk/store'); ?>" method="post">
+                    <form action="<?= base_url('/addMerk'); ?>" method="post">
                         <div class="modal-body">
                             <div class="mb-3">
                                 <label class="form-label">Nama Merk</label>
@@ -93,8 +132,8 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                             <button type="submit" class="btn btn-primary">Simpan</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                         </div>
                     </form>
                 </div>
@@ -140,3 +179,12 @@
                 });
             });
         </script>
+        <?php if (session()->getFlashdata('success')) : ?>
+            <script>
+                Swal.fire("Berhasil!", "<?= session()->getFlashdata('success'); ?>", "success");
+            </script>
+        <?php elseif (session()->getFlashdata('error')) : ?>
+            <script>
+                Swal.fire("Gagal!", "<?= session()->getFlashdata('error'); ?>", "error");
+            </script>
+        <?php endif; ?>

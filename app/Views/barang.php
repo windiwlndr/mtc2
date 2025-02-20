@@ -2,15 +2,6 @@
 <?= $this->include('templates/sidebar'); ?>
 <?= $this->include('templates/navbar'); ?>
 
-<?php
-$db = db_connect();
-$query = "SELECT tb_barang.*, tb_satuan.nama_satuan, tb_kategori.nama_kategori 
-          FROM tb_barang
-          JOIN tb_satuan ON tb_barang.id_satuan = tb_satuan.id_satuan
-          JOIN tb_kategori ON tb_barang.id_kategori = tb_kategori.id_kategori";
-$barang = $db->query($query)->getResultArray();
-?>
-
 <!-- content -->
 <div id="main-content">
     <div class="page-heading">
@@ -39,6 +30,19 @@ $barang = $db->query($query)->getResultArray();
                                 <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalTambahBarang">
                                     <i class="fas fa-plus"></i> Tambah Data
                                 </button>
+                                <!-- modal add-->
+                                <div class="modal fade" id="modalTambahBarang" aria-labelledby="modalTambahBarang" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="modalTambahBarang">User baru</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <?= $this->include('barang/formadd'); ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end modal add -->
                                 <button class="btn btn-primary btn-sm">
                                     <i class="fas fa-print"></i> Cetak Barang + Info Modal
                                 </button>
@@ -74,7 +78,9 @@ $barang = $db->query($query)->getResultArray();
                                     </thead>
                                     <tbody>
                                         <?php $no = 1;
-                                        foreach ($barang as $b) : ?>
+                                        foreach ($barang as $b) :
+                                            //dd($b);
+                                        ?>
                                             <tr>
                                                 <td><?= $no++; ?></td>
                                                 <td><?= $b['id_barang']; ?></td>
@@ -93,8 +99,13 @@ $barang = $db->query($query)->getResultArray();
                                                             Aksi
                                                         </button>
                                                         <ul class="dropdown-menu" aria-labelledby="aksiDropdown">
-                                                            <li><a class="dropdown-item" href="#"><i class="fas fa-edit"></i> Edit</a></li>
-                                                            <li><a class="dropdown-item text-danger" href="#"><i class="fas fa-trash"></i> Hapus</a></li>
+                                                            <li><button type="button" data-bs-toggle="modal" data-bs-target="#editModal<?= $b['id_barang']; ?>" class="dropdown-item"><i class="fas fa-edit"></i> Edit</button></li>
+                                                            <li>
+                                                                <form action="<?= site_url('/deleteBarang'); ?>" method="post">
+                                                                    <input type="hidden" name="id_barang" value="<?= $b['id_barang']; ?>">
+                                                                    <button type="submit" class="dropdown-item text-danger"><i class="fas fa-trash"></i>Hapus</button>
+                                                                </form>
+                                                            </li>
                                                             <li>
                                                                 <hr class="dropdown-divider">
                                                             </li>
@@ -103,12 +114,56 @@ $barang = $db->query($query)->getResultArray();
                                                             <li><a class="dropdown-item" href="#"><i class="fas fa-align-justify"></i> 4 baris</a></li>
                                                             <li><a class="dropdown-item" href="#"><i class="fas fa-file-alt"></i> A4</a></li>
                                                             <li><a class="dropdown-item" href="#"><i class="fas fa-tag"></i> Label</a></li>
-                                                            <li><a class="dropdown-item" href="#"><i class="fas fa-barcode"></i> Barcode</a></li>
+                                                            <li>
+                                                                <!-- <a class="dropdown-item" href="#"><i class="fas fa-barcode"></i> Barcode</a> -->
+                                                                <button type="button" data-bs-toggle="modal" data-bs-target="#barcodeModal<?= $b['id_barang']; ?>" class="dropdown-item"><i class="fas fa-barcode"></i> barcode</button>
+                                                            </li>
                                                             <li>
                                                                 <hr class="dropdown-divider">
                                                             </li>
-                                                            <li><a class="dropdown-item" href="#"><i class="fas fa-search"></i> Detail</a></li>
+                                                            <li>
+                                                                <button type="button" data-bs-toggle="modal" data-bs-target="#detailModal<?= $b['id_barang']; ?>" class="dropdown-item"><i class="fas fa-search"></i> Detail</button>
+                                                                <!-- <a class="dropdown-item" href="#"><i class="fas fa-search"></i> Detail</a> -->
+                                                            </li>
                                                         </ul>
+                                                    </div>
+                                                    <!-- modal edit-->
+                                                    <div class="modal fade" id="editModal<?= $b['id_barang']; ?>" aria-labelledby="editModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="editModalLabel">Ubah Data Barang</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <?= view('barang/formUpdate', ['b' => $b]); ?>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- end modal edit -->
+                                                    <!-- modal detail-->
+                                                    <div class="modal fade" id="detailModal<?= $b['id_barang']; ?>" aria-labelledby="detailModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="detailModalLabel">Detail Barang</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <?= view('barang/detail', ['b' => $b]); ?>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- end modal detail -->
+                                                    <!-- modal barcode -->
+                                                    <div class="modal fade" id="barcodeModal<?= $b['id_barang']; ?>" aria-labelledby="detailModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="detailModalLabel">Barcode Barang <?= $b['nama_barang']; ?></h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <?= view('barang/barcode', ['b' => $b]); ?>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -124,6 +179,20 @@ $barang = $db->query($query)->getResultArray();
 
         <?= $this->include('templates/footer'); ?>
 
+        <script>
+            $('#modalTambahBarang').on('shown.bs.modal', function() {
+                $('#barcode').focus();
+            });
+        </script>
+        <?php if (session()->getFlashdata('success')) : ?>
+            <script>
+                Swal.fire("Berhasil!", "<?= session()->getFlashdata('success'); ?>", "success");
+            </script>
+        <?php elseif (session()->getFlashdata('error')) : ?>
+            <script>
+                Swal.fire("Gagal!", "<?= session()->getFlashdata('error'); ?>", "error");
+            </script>
+        <?php endif; ?>
         <script>
             $(document).ready(function() {
                 $('#barangTable').DataTable({

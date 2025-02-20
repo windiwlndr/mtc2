@@ -16,22 +16,71 @@ class Supplier extends Controller
 
     public function index()
     {
-        $model = new SupplierModel();
-        $data['suppliers'] = $model->findAll(); // Ambil semua data supplier
-        return view('supplier', $data);
-        
-    }
-    
+        $model = $this->supplierModel->findAll();
+        $data = [
+            'title' => 'Kasir || Data Supplier',
+            'suppliers' => $model,
+        ];
 
-    public function save()
+        return view('supplier', $data);
+    }
+
+
+    public function add()
     {
-        $this->supplierModel->save([
-            'nama_supplier' => $this->request->getPost('nama_supplier'),
+        $namaSupplier = $this->request->getPost('nama_supplier');
+        $data = [
+            'nama_supplier' => $namaSupplier,
             'nama_pj' => $this->request->getPost('nama_pj'),
-            'no_tlp' => $this->request->getPost('no_tlp'),
+            'no_telp' => $this->request->getPost('no_telp'),
             'alamat' => $this->request->getPost('alamat'),
-            'link_supplier' => $this->request->getPost('link_supplier'),
-        ]);
-        return redirect()->to('/supplier');
+            'email' => $this->request->getPost('email'),
+            'link_supplier' => url_title(strtolower($namaSupplier)),
+        ];
+
+        if ($this->supplierModel->save($data)) {
+            session()->setFlashdata('success', 'Data berhasil ditambahkan!');
+        } else {
+            session()->setFlashdata('error', 'Gagal menambahkan data.');
+        }
+
+        return redirect()->to(base_url('/supplier'));
+    }
+
+
+    public function update()
+    {
+        $id = $this->request->getPost('id_supplier');
+        $namaSupplier = $this->request->getPost('nama_supplier');
+        // dd($namaSupplier);
+        $data = [
+            'nama_supplier' => $namaSupplier,
+            'nama_pj' => $this->request->getPost('nama_pj'),
+            'no_telp' => $this->request->getPost('no_telp'),
+            'alamat' => $this->request->getPost('alamat'),
+            'email' => $this->request->getPost('email'),
+            'link_supplier' => url_title(strtolower($namaSupplier)),
+        ];
+        if ($this->supplierModel->updateSupplier($id, $data)) {
+            session()->setFlashdata('success', 'Data berhasil diperbarui!');
+            return redirect()->to(base_url('/supplier'));
+        } else {
+            session()->setFlashdata('error', 'Gagal memperbarui data.');
+            return redirect()->to(base_url('/'));
+        }
+    }
+
+    public function delete()
+    {
+        $id = $this->request->getPost('id_supplier');
+
+        if ($this->supplierModel->find($id)) {
+            $this->supplierModel->delete($id);
+            session()->setFlashdata('success', 'Data berhasil dihapus!');
+        } else {
+            session()->setFlashdata('error', 'Gagal menghapus data! Data tidak ditemukan.');
+        }
+
+        return redirect()->to(base_url('/supplier'));
     }
 }

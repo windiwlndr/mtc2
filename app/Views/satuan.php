@@ -62,9 +62,48 @@
                                                 <td><?= $item['id_satuan'] ?></td>
                                                 <td><?= $item['nama_satuan'] ?></td>
                                                 <td>
-                                                    <button class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></button>
-                                                    <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                                                    <div class="row">
+                                                        <div class="col-4">
+                                                            <div class="form-button-action">
+                                                                <button type="button" data-bs-toggle="modal" data-bs-target="#detailModal<?= $item['id_satuan'] ?>" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i> Edit</button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <div class="form-button-action">
+                                                                <form action="<?= base_url('/satuan/delete'); ?>" method="post">
+                                                                    <input type="hidden" name="id_satuan" value="<?= $item['id_satuan']; ?>">
+                                                                    <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i>Hapus</button>
+                                                                </form>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </td>
+                                                <!-- Modal update satuan -->
+                                                <div class="modal fade" id="detailModal<?= $item['id_satuan'] ?>" aria-labelledby="detailModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="detailModalLabel">Edit Data Satuan</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <form action="<?= base_url('satuan/update'); ?>" method="post">
+                                                                <input type="hidden" class="form-control" id="id_satuan" name="id_satuan" value="<?= $item['id_satuan'] ?>">
+                                                                <div class="modal-body">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Nama Satuan</label>
+                                                                        <input type="text" name="nama_satuan" class="form-control" value="<?= $item['nama_satuan'] ?>" required>
+                                                                    </div>
+                                                                </div>
+                                                                <input type="hidden" class="form-control" id="link_satuan" name="link_satuan" value="<?= $item['link_satuan'] ?>">
+                                                                <div class="modal-footer">
+                                                                    <button type="submit" class="btn btn-primary">Simpan</button>
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </tr>
                                         <?php endforeach; ?>
                                     </tbody>
@@ -85,7 +124,7 @@
                         <h5 class="modal-title" id="modalTambahSatuanLabel">Tambah Data Satuan</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="<?= base_url('satuan/store'); ?>" method="post">
+                    <form action="<?= base_url('satuan/add'); ?>" method="post">
                         <div class="modal-body">
                             <div class="mb-3">
                                 <label class="form-label">Nama Satuan</label>
@@ -93,8 +132,8 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                             <button type="submit" class="btn btn-primary">Simpan</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                         </div>
                     </form>
                 </div>
@@ -140,3 +179,13 @@
                 });
             });
         </script>
+
+        <?php if (session()->getFlashdata('success')) : ?>
+            <script>
+                Swal.fire("Berhasil!", "<?= session()->getFlashdata('success'); ?>", "success");
+            </script>
+        <?php elseif (session()->getFlashdata('error')) : ?>
+            <script>
+                Swal.fire("Gagal!", "<?= session()->getFlashdata('error'); ?>", "error");
+            </script>
+        <?php endif; ?>

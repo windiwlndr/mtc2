@@ -19,6 +19,10 @@ class MetodeBayar extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => '100',
             ],
+            'created_at' => [
+                'type' => 'DATETIME',
+                'null' => true,
+            ],
         ]);
         $this->forge->addPrimaryKey('id_metode_bayar');
         $this->forge->createTable('tb_metode_bayar');

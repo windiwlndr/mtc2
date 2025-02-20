@@ -3,6 +3,7 @@
 namespace App\Database\Seeds;
 
 use CodeIgniter\Database\Seeder;
+use CodeIgniter\I18n\Time;
 
 class User extends Seeder
 {
@@ -17,7 +18,7 @@ class User extends Seeder
                 'status' => 'aktif',
                 'level' => '1',
                 'foto' => 'assets/images/faces/1.jpg',
-                'created_at' => date('Y-m-d H:i:s'),
+                'created_at' => Time::now('Asia/Jakarta', 'Y-m-d H:i:s'),
             ],
             [
                 'username' => 'admin',
@@ -27,8 +28,7 @@ class User extends Seeder
                 'status' => 'aktif',
                 'level' => '2',
                 'foto' => 'assets/images/faces/3.jpg',
-                'created_at' => date('Y-m-d H:i:s'),
-                // 'updated_at' => date('Y-m-d H:i:s'),
+                'created_at' => Time::now('Asia/Jakarta', 'Y-m-d H:i:s'),
             ],
             [
                 'username' => 'kasir',
@@ -38,7 +38,7 @@ class User extends Seeder
                 'status' => 'aktif',
                 'level' => '3',
                 'foto' => 'assets/images/faces/2.jpg',
-                'created_at' => date('Y-m-d H:i:s'),
+                'created_at' => Time::now('Asia/Jakarta', 'Y-m-d H:i:s'),
             ],
         ];
         $this->db->table('user')->insertBatch($data);

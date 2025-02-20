@@ -36,7 +36,7 @@
                                 <!-- Profil sebelum Logout -->
                                 <li class="nav-item">
                                     <a class="nav-link d-flex align-items-center text-nowrap" href="#">
-                                        <img src="assets/images/faces/2.jpg" alt="Profile" class="rounded-circle border border-dark" style="width: 40px; height: 40px; margin-right: 8px;">
+                                        <img src="<?= base_url(); ?>assets/images/faces/2.jpg" alt="Profile" class="rounded-circle border border-dark" style="width: 40px; height: 40px; margin-right: 8px;">
                                         <span>Manager</span>
                                     </a>
                                 </li>

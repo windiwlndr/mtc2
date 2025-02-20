@@ -13,7 +13,7 @@
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">Data Master</a></li>
+                            <li class="breadcrumb-item"><a href="#">Data Master</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Data User
                             </li>
                         </ol>
@@ -27,7 +27,87 @@
                 <div class="col-12">
                     <div class="card shadow-sm">
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalTambahData"><i class="fas fa-plus"></i> Tambah Data</button>
+                            <!-- <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalTambahData"><i class="fas fa-plus"></i> Tambah Data</button>, -->
+                            <button type="button" data-bs-toggle="modal" data-bs-target="#addModal" class="btn btn-success btn-sm"><i class="fas fa-plus"></i> Tambah Data</button>
+                            <!-- modal add-->
+                            <div class="modal fade" id="addModal" aria-labelledby="addModal" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="addModal">User baru</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <form action="<?= site_url('/createUser') ?>" method="POST" enctype="multipart/form-data">
+                                            <div class="modal-body">
+                                                <!-- <input type="hidden" name="id_user"> -->
+                                                <div class="row">
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="nama">Nama</label>
+                                                            <input type="text" class="form-control" id="nama" name="nama">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="username">Username</label>
+                                                            <input type="text" class="form-control" id="username" name="username">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="email">Email</label>
+                                                            <input type="text" class="form-control" id="email" name="email">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="password">Password</label>
+                                                            <input type="password" class="form-control" id="password" name="password">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="status">Status</label>
+                                                            <select class="form-control" id="status" name="status">
+
+                                                                <option value="aktif">Aktif</option>
+                                                                <option value="nonaktif">Nonaktif</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="level">Level</label>
+                                                            <select class="form-control" id="level" name="level">
+                                                                <option value=""></option>
+                                                                <option value="1">Manager</option>
+                                                                <option value="2">Admin</option>
+                                                                <option value="3">Kasir</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-12">
+                                                    <label for="foto">Foto</label>
+                                                    <input type="file" class="form-control mt-2" name="foto" id="fotoInput">
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end modal add -->
                             <div class="btn-group">
                                 <button class="btn btn-light"><i class="fas fa-chevron-down"></i></button>
                                 <button class="btn btn-light"><i class="fas fa-sync-alt"></i></button>
@@ -65,21 +145,108 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach ($user as $admin) : ?>
+                                        <?php
+                                        $no = 1;
+                                        foreach ($user as $admin) :
+                                        ?>
                                             <tr>
-                                                <td><?= $admin['id_user']; ?></td>
+                                                <td><?= $no++ ?></td>
                                                 <td><?= $admin['nama']; ?></td>
                                                 <td><?= $admin['username']; ?></td>
                                                 <td><?= $admin['level']; ?></td>
                                                 <td><?= $admin['created_at']; ?></td>
                                                 <td><img src="<?= $admin['foto']; ?>" class="rounded-circle" alt="Foto" width="50" height="50"></td>
                                                 <td>
-                                                    <button class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></button>
-                                                    <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <div class="form-button-action">
+                                                                <button type="button" data-bs-toggle="modal" data-bs-target="#detailModal<?= $admin['id_user']; ?>" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i> Edit</button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="form-button-action">
+                                                                <form action="<?= site_url('/deleteUser'); ?>" method="post">
+                                                                    <input type="hidden" name="id_user" value="<?= $admin['id_user']; ?>">
+                                                                    <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i>Hapus</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- modal update-->
+                                                    <div class="modal fade" id="detailModal<?= $admin['id_user']; ?>" aria-labelledby="detailModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="detailModalLabel">Detail Informasi</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <form action="<?= site_url('/updateUser') ?>" method="POST" enctype="multipart/form-data">
+                                                                    <div class="modal-body">
+                                                                        <input type="hidden" name="id_user" value="<?= $admin['id_user']; ?>">
+
+                                                                        <div class="row">
+                                                                            <div class="col-12 text-center">
+                                                                                <img src="<?= $admin['foto']; ?>" class="rounded-circle" alt="Foto" width="100" height="100" id="previewFoto<?= $admin['id_user']; ?>">
+                                                                                <input type="file" class="form-control mt-2" name="foto" id="fotoInput<?= $admin['id_user']; ?>">
+                                                                            </div>
+
+                                                                            <div class="col-md-6">
+                                                                                <div class="form-group">
+                                                                                    <label for="nama">Nama</label>
+                                                                                    <input type="text" class="form-control" id="nama" name="nama" value="<?= $admin['nama'] ?>">
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="col-md-6">
+                                                                                <div class="form-group">
+                                                                                    <label for="username">Username</label>
+                                                                                    <input type="text" class="form-control" id="username" name="username" value="<?= $admin['username'] ?>">
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="col-md-6">
+                                                                                <div class="form-group">
+                                                                                    <label for="level">Level</label>
+                                                                                    <select class="form-control" id="level" name="level">
+                                                                                        <option value="<?= $admin['level'] ?>"><?= match ($admin['level']) {
+                                                                                                                                    '1' => 'manager',
+                                                                                                                                    '2' => 'admin',
+                                                                                                                                    default => 'kasir'
+                                                                                                                                } ?> </option>
+                                                                                        <option value="1" <?= $admin['level'] == 'manager' ? 'selected' : ''; ?>>Manager</option>
+                                                                                        <option value="2" <?= $admin['level'] == 'admin' ? 'selected' : ''; ?>>Admin</option>
+                                                                                        <option value="3" <?= $admin['level'] == 'kasir' ? 'selected' : ''; ?>>Kasir</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="col-md-6">
+                                                                                <div class="form-group">
+                                                                                    <label for="status">Status</label>
+                                                                                    <select class="form-control" id="status" name="status">
+                                                                                        <option value="<?= $admin['status']; ?>" <?= ($admin['status'] == $admin['status']) ? 'selected' : ''; ?>>
+                                                                                            <?= $admin['status']; ?>
+                                                                                        </option>
+                                                                                        <option value="aktif" <?= $admin['status'] == 'aktif' ? 'selected' : ''; ?>>Aktif</option>
+                                                                                        <option value="nonaktif" <?= $admin['status'] == 'nonaktif' ? 'selected' : ''; ?>>Nonaktif</option>
+
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- end modal update -->
+                                                <?php endforeach; ?>
                                                 </td>
                                             </tr>
-                                        <?php endforeach; ?>
-                                        <!-- Tambahkan data lain di sini -->
                                     </tbody>
                                 </table>
                             </div>
@@ -101,44 +268,17 @@
             </div>
         </section>
 
-        <!-- Modal Tambah User -->
-        <div class="modal fade" id="modalTambahData" tabindex="-1" aria-labelledby="modalTambahDataLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalTambahDataLabel">Tambah Data User</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <form action="<?= base_url('/users/add'); ?>" method="post" enctype="multipart/form-data">
-                        <div class="modal-body">
-                            <div class="mb-3">
-                                <label for="nama" class="form-label">Nama</label>
-                                <input type="text" class="form-control" id="nama" name="nama" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="username" class="form-label">Username</label>
-                                <input type="text" class="form-control" id="username" name="username" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="level" class="form-label">Level</label>
-                                <select class="form-select" id="level" name="level" required>
-                                    <option value="admin">Admin</option>
-                                    <option value="user">User</option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="foto" class="form-label">Foto</label>
-                                <input type="file" class="form-control" id="foto" name="foto">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                            <button type="submit" class="btn btn-primary">Simpan</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
 
 
         <?= $this->include('templates/footer'); ?>
+        <?php if (session()->getFlashdata('success')) : ?>
+            <script>
+                Swal.fire("Berhasil!", "<?= session()->getFlashdata('success'); ?>", "success");
+            </script>
+        <?php elseif (session()->getFlashdata('error')) : ?>
+            <script>
+                Swal.fire("Gagal!", "<?= session()->getFlashdata('error'); ?>", "error");
+            </script>
+        <?php endif; ?>
+
+        

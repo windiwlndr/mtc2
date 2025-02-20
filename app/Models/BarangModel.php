@@ -30,8 +30,14 @@ class BarangModel extends Model
         'tgl_entri_awal',
         'foto',
         'rak_barang',
-        'tab_rak'
+        'tab_rak',
+        'created_at'
     ];
+
+    public function updateBarang($id, $data)
+    {
+        return $this->update($id, $data);
+    }
 
     public function getBarang()
     {
