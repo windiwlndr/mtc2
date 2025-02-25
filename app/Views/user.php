@@ -157,21 +157,16 @@
                                                 <td><?= $admin['created_at']; ?></td>
                                                 <td><img src="<?= $admin['foto']; ?>" class="rounded-circle" alt="Foto" width="50" height="50"></td>
                                                 <td>
-                                                    <div class="row">
-                                                        <div class="col-6">
-                                                            <div class="form-button-action">
-                                                                <button type="button" data-bs-toggle="modal" data-bs-target="#detailModal<?= $admin['id_user']; ?>" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i> Edit</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <div class="form-button-action">
-                                                                <form action="<?= site_url('/deleteUser'); ?>" method="post">
-                                                                    <input type="hidden" name="id_user" value="<?= $admin['id_user']; ?>">
-                                                                    <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i>Hapus</button>
-                                                                </form>
-                                                            </div>
-                                                        </div>
+                                                    <div class="d-flex">
+                                                        <button type="button" data-bs-toggle="modal" data-bs-target="#detailModal<?= $admin['id_user']; ?>" class="btn btn-sm btn-warning me-2">
+                                                            <i class="fas fa-edit"></i> Edit
+                                                        </button>
+                                                        <form action="<?= site_url('/deleteUser'); ?>" method="post">
+                                                            <input type="hidden" name="id_user" value="<?= $admin['id_user']; ?>">
+                                                            <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Hapus</button>
+                                                        </form>
                                                     </div>
+
                                                     <!-- modal update-->
                                                     <div class="modal fade" id="detailModal<?= $admin['id_user']; ?>" aria-labelledby="detailModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered">
@@ -280,5 +275,3 @@
                 Swal.fire("Gagal!", "<?= session()->getFlashdata('error'); ?>", "error");
             </script>
         <?php endif; ?>
-
-        

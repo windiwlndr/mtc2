@@ -50,3 +50,7 @@ $routes->post('/deleteBarang', 'Barang::delete');
 $routes->post('/createBarang', 'Barang::create');
 $routes->get('/barcode/(:num)', 'Barang::showBarcode/$1');
 $routes->get('barang/generateBarcode/(:any)', 'Barang::generateBarcode/$1');
+
+
+// Faktur Beli
+$routes->get('/faktur_pembelian', 'FakturBeli::index');

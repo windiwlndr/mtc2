@@ -53,6 +53,12 @@
                         </li> -->
                     </ul>
                 </li>
+                <li class="sidebar-item">
+                    <a href="<?= base_url('faktur_pembelian'); ?>" class="sidebar-link">
+                        <i class="fa-solid fa-file-invoice"></i>
+                        <span>Faktur Pembelian</span>
+                    </a>
+                </li>
             </ul>
         </div>
 
