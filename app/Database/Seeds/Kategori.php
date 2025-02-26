@@ -11,19 +11,22 @@ class Kategori extends Seeder
         $data = [
             [
                 'nama_kategori' => 'Makanan',
+                'validasi_stok' => '0',
                 'link_kategori' => 'makanan',
             ],
             [
                 'nama_kategori' => 'Minuman',
+                'validasi_stok' => '1',
                 'link_kategori' => 'minuman',
             ],
             [
                 'nama_kategori' => 'Snack',
+                'validasi_stok' => '0',
                 'link_kategori' => 'snack',
             ],
         ];
 
-        // Insert data ke tabel tb_kategori
+        
         $this->db->table('tb_kategori')->insertBatch($data);
     }
 }

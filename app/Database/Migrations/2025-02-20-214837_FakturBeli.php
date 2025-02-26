@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class CreateFakturBeliTable extends Migration
+class FakturBeli extends Migration
 {
     public function up()
     {
@@ -15,10 +15,15 @@ class CreateFakturBeliTable extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
+            'no_faktur_beli' => [
+                'type' => 'INT',
+                'constraint' => 12,
+                'unsigned'   => true,
+            ],
             'tanggal_faktur' => [
                 'type' => 'DATE',
             ],
-            'id_supplier' => [ // Sudah diperbaiki dari 'id_supliyer' ke 'id_supplier'
+            'id_supplier' => [ 
                 'type'       => 'INT',
                 'constraint' => 11,
                 'unsigned'   => true,
@@ -50,7 +55,7 @@ class CreateFakturBeliTable extends Migration
         $this->forge->addKey('id_faktur_beli', true);
         $this->forge->addForeignKey('id_supplier', 'tb_supplier', 'id_supplier', 'CASCADE', 'CASCADE');
         $this->forge->createTable('tb_faktur_beli');
-    }
+    } 
 
     public function down()
     {

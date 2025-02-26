@@ -1,10 +1,57 @@
-<form action="<?= site_url('/createFaktur') ?>" method="POST">
-    <div class="modal-body">
+<form action="<?= site_url('/createFakturBeli') ?>" method="POST">
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
+                    <label for="id_barang">ID Barang / Barcode</label>
+                    <input type="text" class="form-control" id="id_barang" name="id_barang">
+                    <button class="btn btn-success mt-2" id="btnCari" data-bs-toggle="modal" data-bs-target="#modalBarang"> <i class="fas fa-search"></i>Cari Barang</button>
+                </div>
+            </div>
+            <!-- modal detail-->
+            <div class="modal fade" id="modalBarang" aria-labelledby="modalBarangLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalBarangLabel">data barang</h5>
+                            <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                        </div>
+                        <table class="table table-hover">
+                            <thead class="table-primary">
+                                <tr>
+                                    <th>No</th>
+                                    <th>ID Barang</th>
+                                    <th>Nama Barang</th>
+                                    <th>Stok Real</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $no = 1;
+                                foreach ($barang as $g) : ?>
+                                    <tr>
+                                        <td><?= $no++; ?></td>
+                                        <td><a href="#" class="pilih-barcode" data-barcode="<?= $g['barcode']; ?>" data-nama="<?= $g['nama_barang']; ?>"> <?= $g['barcode']; ?></a></td>
+                                    </tr>                                    
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+            <!-- end modal detail -->
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="nama_barang">Nama Barang</label>
+                    <input type="text" class="form-control" id="nama_barang" name="nama_barang" readonly>
+                </div>
+            </div>
+
+
+            <div class="col-md-6">
+                <div class="form-group">
                     <label for="no_faktur">No. Faktur</label>
-                    <input type="text" class="form-control" id="no_faktur" name="no_faktur" required>
+                    <input type="text" class="form-control" id="no_faktur" name="no_faktur">
+                    <p>Ganti No. Faktur jika terdapat No Kwitansi/Nota Pembelian Kulakan</p>
                 </div>
             </div>
 
@@ -72,8 +119,6 @@
                 </div>
             </div>
         </div>
-    </div>
-
     <div class="modal-footer">
         <button type="submit" class="btn btn-primary">Simpan</button>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>

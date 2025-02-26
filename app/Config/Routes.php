@@ -54,3 +54,8 @@ $routes->get('barang/generateBarcode/(:any)', 'Barang::generateBarcode/$1');
 
 // Faktur Beli
 $routes->get('/faktur_pembelian', 'FakturBeli::index');
+$routes->post('/updateFakturBeli', 'FakturBeli::update');
+$routes->post('/deleteFakturBeli', 'FakturBeli::delete');
+
+// tamah faktur
+$routes->get('/tambahFaktur', 'DetailFaktur::index');

@@ -19,6 +19,10 @@ class Kategori extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => '100',
             ],
+            'validasi_stok' => [
+                'type' => 'ENUM',
+                'constraint' => ['0', '1'], //0=ya , 1=tidak
+            ],
             'link_kategori' => [
                 'type' => 'VARCHAR',
                 'constraint' => '100',

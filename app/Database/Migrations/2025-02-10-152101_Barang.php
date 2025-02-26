@@ -113,6 +113,13 @@ class CreateTbBarang extends Migration
                 'type' => 'DATETIME',
                 'null' => true,
             ],
+            'diskon_jual' => [
+                'type' => 'DECIMAL',
+                'constraint' => '5,2',
+                'default' => 0,
+                'null' => false,
+                'after' => 'harga_jual_member',
+            ],
         ]);
 
         $this->forge->addPrimaryKey('id_barang');

@@ -4,8 +4,8 @@
 
 <!-- content -->
 <div id="main-content">
-<div class="page-heading">
-<div class="page-title">
+    <div class="page-heading">
+        <div class="page-title">
             <div class="row">
                 <!-- Breadcrumb (Kanan) -->
                 <div class="col-12 col-md-6 order-md-2 order-first">
@@ -68,9 +68,12 @@
                     <div class="card shadow-sm">
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <div>
-                                <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalTambahFaktur">
-                                    <i class="fas fa-plus"></i> New Tambah Faktur
-                                </button>
+                                <form action="<?= base_url('/tambahFaktur'); ?>">
+                                    <button class="btn btn-success btn-sm" >
+                                        <i class="fas fa-plus"></i> New Tambah Faktur
+                                    </button>
+                                </form>
+                                
                                 <button class="btn btn-warning btn-sm text-white" data-bs-toggle="modal" data-bs-target="#modalTambahFaktur">
                                     <i class="fas fa-plus"></i> Tambah Faktur Versi Lama
                                 </button>
@@ -111,9 +114,22 @@
                                                         <button type="button" class="btn btn-success btn-sm">
                                                             <i class="fas fa-plus"></i>
                                                         </button>
-                                                        <button type="button" class="btn btn-warning btn-sm">
+                                                        <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modalDetailFaktur<?= $f['id_faktur_beli']; ?>">
                                                             <i class="fas fa-search"></i>
                                                         </button>
+                                                        <!-- modal detail-->
+                                                        <div class="modal fade" id="modalDetailFaktur<?= $f['id_faktur_beli']; ?>" aria-labelledby="modalDetailFakturLabel" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="modalDetailFakturLabel">Detail Faktur</h5>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
+                                                                    <?= view('faktur/detailFaktur', ['f' => $f]); ?>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- end modal detail -->
                                                         <button type="submit" class="btn btn-danger btn-sm">
                                                             <i class="fas fa-trash"></i>
                                                         </button>
@@ -129,7 +145,7 @@
                 </div>
             </div>
         </section>
-        
+
 
         <?= $this->include('templates/footer'); ?>
 
@@ -151,6 +167,41 @@
                     },
                     "drawCallback": function() {
                         $('.dataTables_filter input').attr("placeholder", "Search...").addClass("form-control w-auto");
+                    }
+                });
+            });
+        </script>
+
+        <!-- nomer faktur-->
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                let noFakturInput = document.getElementById("no_faktur");
+                if (!noFakturInput.value) {
+                    noFakturInput.value = Math.floor(1000000000 + Math.random() * 9000000000);
+                }
+            });
+        </script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                document.querySelectorAll(".pilih-barcode").forEach(item => {
+                    item.addEventListener("click", function(event) {
+                        event.preventDefault(); // Mencegah link berpindah halaman
+                        let barcode = this.getAttribute("data-barcode");
+                        let nama = this.getAttribute("data-nama");
+                        document.getElementById("id_barang").value = barcode;
+                        document.getElementById("nama_barang").value = nama;
+                        var modal = bootstrap.Modal.getInstance(document.getElementById('modalBarang'));
+                        modal.hide(); // Menutup modal setelah memilih barang
+                    });
+                });
+
+                document.getElementById("id_barang").addEventListener("input", function() {
+                    let barcode = this.value;
+                    if (barangData[barcode]) {
+                        document.getElementById("nama_barang").value = barangData[barcode];
+                    } else {
+                        document.getElementById("nama_barang").value = "";
                     }
                 });
             });
