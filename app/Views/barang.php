@@ -117,7 +117,7 @@
                                                             <li>
                                                                 <!-- <a class="dropdown-item" href="#"><i class="fas fa-barcode"></i> Barcode</a> -->
                                                                 <button type="button" data-bs-toggle="modal" data-bs-target="#barcodeModal<?= $b['id_barang']; ?>" class="dropdown-item"><i class="fas fa-barcode"></i> barcode</button>
-                                                            </li>
+                                                           </li>
                                                             <li>
                                                                 <hr class="dropdown-divider">
                                                             </li>
