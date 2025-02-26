@@ -72,6 +72,7 @@
                                             <th>H. Jual Ecer</th>
                                             <th>H. Jual Member</th>
                                             <th>H. Grosir</th>
+                                            <th>Diskon</th>
                                             <th>Rak</th>
                                             <th>Aksi</th>
                                         </tr>
@@ -92,6 +93,7 @@
                                                 <td><?= number_format($b['harga_jual_normal'], 2, ',', '.'); ?></td>
                                                 <td><?= number_format($b['harga_jual_member'], 2, ',', '.'); ?></td>
                                                 <td><?= number_format($b['harga_jual_lv1'], 2, ',', '.'); ?></td>
+                                                <td><?= number_format($b['diskon_jual'], 2, ',', '.'); ?></td>
                                                 <td><?= $b['rak_barang']; ?></td>
                                                 <td>
                                                     <div class="dropdown">

@@ -62,23 +62,17 @@
                                                 <td><?= $item['id_satuan'] ?></td>
                                                 <td><?= $item['nama_satuan'] ?></td>
                                                 <td>
-                                                    <div class="row">
-                                                        <div class="col-4">
-                                                            <div class="form-button-action">
-                                                                <button type="button" data-bs-toggle="modal" data-bs-target="#detailModal<?= $item['id_satuan'] ?>" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i> Edit</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-4">
-                                                            <div class="form-button-action">
-                                                                <form action="<?= base_url('/satuan/delete'); ?>" method="post">
-                                                                    <input type="hidden" name="id_satuan" value="<?= $item['id_satuan']; ?>">
-                                                                    <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i>Hapus</button>
-                                                                </form>
-
-                                                            </div>
-                                                        </div>
+                                                    <div class="d-flex">
+                                                        <button type="button" data-bs-toggle="modal" data-bs-target="#detailModal<?= $item['id_satuan'] ?>" class="btn btn-sm btn-warning me-2">
+                                                            <i class="fas fa-edit"></i> Edit
+                                                        </button>
+                                                        <form action="<?= base_url('/satuan/delete'); ?>" method="post">
+                                                            <input type="hidden" name="id_satuan" value="<?= $item['id_satuan']; ?>">
+                                                            <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Hapus</button>
+                                                        </form>
                                                     </div>
                                                 </td>
+
                                                 <!-- Modal update satuan -->
                                                 <div class="modal fade" id="detailModal<?= $item['id_satuan'] ?>" aria-labelledby="detailModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered">

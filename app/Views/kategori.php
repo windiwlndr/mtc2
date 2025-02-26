@@ -62,37 +62,29 @@
                                                 <td><?= $item['id_kategori'] ?></td>
                                                 <td><?= $item['nama_kategori'] ?></td>
                                                 <td>
-                                                    <!-- <button class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></button>
-                                                    <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button> -->
-                                                    <div class="row">
-                                                        <div class="col-4">
-                                                            <div class="form-button-action">
-                                                                <button type="button" data-bs-toggle="modal" data-bs-target="#detailModal<?= $item['id_kategori'] ?>" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i> Edit</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-4">
-                                                            <div class="form-button-action">
-                                                                <form action="<?= base_url('/kategori/delete'); ?>" method="post">
-                                                                    <input type="hidden" name="id_kategori" value="<?= $item['id_kategori']; ?>">
-                                                                    <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i>Hapus</button>
-                                                                </form>
-
-                                                            </div>
-                                                        </div>
+                                                    <div class="d-flex">
+                                                        <button type="button" data-bs-toggle="modal" data-bs-target="#detailModal<?= $item['id_kategori'] ?>" class="btn btn-sm btn-warning me-2">
+                                                            <i class="fas fa-edit"></i> Edit
+                                                        </button>
+                                                        <form action="<?= base_url('/kategori/delete'); ?>" method="post">
+                                                            <input type="hidden" name="id_kategori" value="<?= $item['id_kategori']; ?>">
+                                                            <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Hapus</button>
+                                                        </form>
                                                     </div>
+
                                                     <!-- Modal update kategori -->
                                                     <div class="modal fade" id="detailModal<?= $item['id_kategori'] ?>" aria-labelledby="detailModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h5 class="modal-title" id="detailModalLabel">Edit Data kategori</h5>
+                                                                    <h5 class="modal-title" id="detailModalLabel">Edit Data Kategori</h5>
                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
                                                                 <form action="<?= base_url('/kategori/update'); ?>" method="post">
                                                                     <input type="hidden" class="form-control" id="id_kategori" name="id_kategori" value="<?= $item['id_kategori'] ?>">
                                                                     <div class="modal-body">
                                                                         <div class="mb-3">
-                                                                            <label class="form-label">Nama kategori</label>
+                                                                            <label class="form-label">Nama Kategori</label>
                                                                             <input type="text" name="nama_kategori" class="form-control" value="<?= $item['nama_kategori'] ?>" required>
                                                                         </div>
                                                                     </div>

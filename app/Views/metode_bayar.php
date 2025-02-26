@@ -83,21 +83,19 @@
                                                 <td><?= $item['id_metode_bayar'] ?></td>
                                                 <td><?= $item['metode_bayar'] ?></td>
                                                 <td>
-                                                    <div class="row">
-                                                        <div class="col-4">
-                                                            <div class="form-button-action">
-                                                                <button type="button" data-bs-toggle="modal" data-bs-target="#modaleditMetode<?= $item['id_metode_bayar']; ?>" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i>Edit</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-4">
-                                                            <div class="form-button-action">
-                                                                <form action="<?= site_url('/metode_bayar/delete'); ?>" method="post">
-                                                                    <input type="hidden" name="id_metode_bayar" value="<?= $item['id_metode_bayar']; ?>">
-                                                                    <button type="submit" class="btn btn-sm btn-danger" ><i class="fas fa-trash"></i>Hapus</button>
-                                                                </form>
-                                                            </div>
-                                                        </div>
+                                                    <div class="d-flex">
+                                                        <button type="button" data-bs-toggle="modal" data-bs-target="#modaleditMetode<?= $item['id_metode_bayar']; ?>" class="btn btn-sm btn-warning me-2">
+                                                            <i class="fas fa-edit"></i> Edit
+                                                        </button>
+                                                        <form action="<?= site_url('/metode_bayar/delete'); ?>" method="post">
+                                                            <input type="hidden" name="id_metode_bayar" value="<?= $item['id_metode_bayar']; ?>">
+                                                            <button type="submit" class="btn btn-sm btn-danger">
+                                                                <i class="fas fa-trash"></i> Hapus
+                                                            </button>
+                                                        </form>
                                                     </div>
+
+                                                    <!-- Modal Edit -->
                                                     <div class="modal fade" id="modaleditMetode<?= $item['id_metode_bayar']; ?>" aria-labelledby="modaleditMetodeLabel" aria-hidden="true">
                                                         <div class="modal-dialog">
                                                             <div class="modal-content">
@@ -122,6 +120,7 @@
                                                         </div>
                                                     </div>
                                                 </td>
+
                                             </tr>
                                         <?php endforeach; ?>
                                     </tbody>
