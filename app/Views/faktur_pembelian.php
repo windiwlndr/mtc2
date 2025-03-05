@@ -69,14 +69,16 @@
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <div>
                                 <form action="<?= base_url('/tambahFaktur'); ?>">
-                                    <button class="btn btn-success btn-sm" >
+                                    <button class="btn btn-success btn-sm">
                                         <i class="fas fa-plus"></i> New Tambah Faktur
                                     </button>
                                 </form>
-                                
-                                <button class="btn btn-warning btn-sm text-white" data-bs-toggle="modal" data-bs-target="#modalTambahFaktur">
-                                    <i class="fas fa-plus"></i> Tambah Faktur Versi Lama
-                                </button>
+
+                                <form action="<?= base_url('/tambahFakturLama'); ?>">
+                                    <button class="btn btn-warning btn-sm text-white" data-bs-toggle="modal" data-bs-target="#modalTambahFaktur">
+                                        <i class="fas fa-plus"></i> Tambah Faktur Versi Lama
+                                    </button>
+                                </form>
                             </div>
                         </div>
                         <div class="card-body">
@@ -107,7 +109,7 @@
                                                 <td><?= $f['status']; ?></td>
                                                 <td>
                                                     <div class="d-flex align-items-center gap-2">
-                                                        <div class="form-check d-flex align-items-center gap-1">
+                                                        <div class="form-check d-flex align-items-center gap-1 mb-0">
                                                             <input type="checkbox" class="form-check-input" id="lunasCheckbox">
                                                             <label for="lunasCheckbox" class="form-check-label">Lunas</label>
                                                         </div>
@@ -117,24 +119,26 @@
                                                         <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modalDetailFaktur<?= $f['id_faktur_beli']; ?>">
                                                             <i class="fas fa-search"></i>
                                                         </button>
-                                                        <!-- modal detail-->
-                                                        <div class="modal fade" id="modalDetailFaktur<?= $f['id_faktur_beli']; ?>" aria-labelledby="modalDetailFakturLabel" aria-hidden="true">
-                                                            <div class="modal-dialog modal-dialog-centered">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title" id="modalDetailFakturLabel">Detail Faktur</h5>
-                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                    </div>
-                                                                    <?= view('faktur/detailFaktur', ['f' => $f]); ?>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- end modal detail -->
                                                         <button type="submit" class="btn btn-danger btn-sm">
                                                             <i class="fas fa-trash"></i>
                                                         </button>
                                                     </div>
+
+                                                    <!-- modal detail -->
+                                                    <div class="modal fade" id="modalDetailFaktur<?= $f['id_faktur_beli']; ?>" aria-labelledby="modalDetailFakturLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="modalDetailFakturLabel">Detail Faktur</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <?= view('fakturlama/detailFaktur', ['f' => $f]); ?>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- end modal detail -->
                                                 </td>
+
                                             </tr>
                                         <?php endforeach; ?>
                                     </tbody>

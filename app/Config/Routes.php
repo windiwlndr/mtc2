@@ -50,6 +50,8 @@ $routes->post('/deleteBarang', 'Barang::delete');
 $routes->post('/createBarang', 'Barang::create');
 $routes->get('/barcode/(:num)', 'Barang::showBarcode/$1');
 $routes->get('barang/generateBarcode/(:any)', 'Barang::generateBarcode/$1');
+// $routes->get('/barang/detail/(:num)', 'BarangController::detail/$1');
+
 
 
 // Faktur Beli
@@ -59,3 +61,4 @@ $routes->post('/deleteFakturBeli', 'FakturBeli::delete');
 
 // tamah faktur
 $routes->get('/tambahFaktur', 'DetailFaktur::index');
+$routes->get('/tambahFakturLama', 'DetailFakturLama::index');

@@ -144,16 +144,17 @@
                                                     <!-- end modal edit -->
                                                     <!-- modal detail-->
                                                     <div class="modal fade" id="detailModal<?= $b['id_barang']; ?>" aria-labelledby="detailModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog modal-dialog-centered">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="detailModalLabel">Detail Barang</h5>
-                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                </div>
-                                                                <?= view('barang/detail', ['b' => $b]); ?>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="detailModalLabel">Detail Barang</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <?= view('barang/detailBarang', ['b' => $b]); ?>
+        </div>
+    </div>
+</div>
+
                                                     <!-- end modal detail -->
                                                     <!-- modal barcode -->
                                                     <div class="modal fade" id="barcodeModal<?= $b['id_barang']; ?>" aria-labelledby="detailModalLabel" aria-hidden="true">

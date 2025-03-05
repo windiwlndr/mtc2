@@ -1,126 +1,93 @@
-<form action="<?= site_url('/createFakturBeli') ?>" method="POST">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="id_barang">ID Barang / Barcode</label>
-                    <input type="text" class="form-control" id="id_barang" name="id_barang">
-                    <button class="btn btn-success mt-2" id="btnCari" data-bs-toggle="modal" data-bs-target="#modalBarang"> <i class="fas fa-search"></i>Cari Barang</button>
-                </div>
-            </div>
-            <!-- modal detail-->
-            <div class="modal fade" id="modalBarang" aria-labelledby="modalBarangLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="modalBarangLabel">data barang</h5>
-                            <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
-                        </div>
-                        <table class="table table-hover">
-                            <thead class="table-primary">
-                                <tr>
-                                    <th>No</th>
-                                    <th>ID Barang</th>
-                                    <th>Nama Barang</th>
-                                    <th>Stok Real</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php $no = 1;
-                                foreach ($barang as $g) : ?>
-                                    <tr>
-                                        <td><?= $no++; ?></td>
-                                        <td><a href="#" class="pilih-barcode" data-barcode="<?= $g['barcode']; ?>" data-nama="<?= $g['nama_barang']; ?>"> <?= $g['barcode']; ?></a></td>
-                                    </tr>                                    
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
+<?= $this->include('templates/header'); ?>
+<?= $this->include('templates/sidebar'); ?>
+<?= $this->include('templates/navbar'); ?>
 
-                    </div>
+<div id="main-content">
+    <div class="page-heading">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-12 col-md-6 order-md-1 order-last">
+                    <h3>Form Faktur Beli</h3>
                 </div>
-            </div>
-            <!-- end modal detail -->
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="nama_barang">Nama Barang</label>
-                    <input type="text" class="form-control" id="nama_barang" name="nama_barang" readonly>
-                </div>
-            </div>
-
-
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="no_faktur">No. Faktur</label>
-                    <input type="text" class="form-control" id="no_faktur" name="no_faktur">
-                    <p>Ganti No. Faktur jika terdapat No Kwitansi/Nota Pembelian Kulakan</p>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="tanggal_faktur">Tanggal Faktur</label>
-                    <input type="date" class="form-control" id="tanggal_faktur" name="tanggal_faktur" required>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="supplier">Supplier</label>
-                    <select class="form-control" id="supplier" name="supplier" required>
-                        <?php foreach ($supplier as $s) : ?>
-                            <option value="<?= $s['id_supplier']; ?>"><?= $s['nama_supplier']; ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="total_harga">Total Harga</label>
-                    <input type="text" class="form-control" id="total_harga" name="total_harga" required>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="diskon">Diskon (%)</label>
-                    <input type="text" class="form-control" id="diskon" name="diskon" placeholder="0">
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="ppn">PPN (%)</label>
-                    <input type="text" class="form-control" id="ppn" name="ppn" placeholder="0">
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="metode_bayar">Metode Pembayaran</label>
-                    <select class="form-control" id="metode_bayar" name="metode_bayar" required>
-                        <option value="Tunai">Tunai</option>
-                        <option value="Transfer">Transfer</option>
-                        <option value="Kredit">Kredit</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="jatuh_tempo">Jatuh Tempo</label>
-                    <input type="date" class="form-control" id="jatuh_tempo" name="jatuh_tempo">
-                </div>
-            </div>
-
-            <div class="col-12">
-                <div class="form-group">
-                    <label for="catatan">Catatan</label>
-                    <textarea class="form-control" id="catatan" name="catatan" rows="3"></textarea>
+                <div class="col-12 col-md-6 order-md-2 order-first">
+                    <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html">Faktur Pembelian</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Form Faktur Beli</li>
+                        </ol>
+                    </nav>
                 </div>
             </div>
         </div>
-    <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Simpan</button>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+
+        <section class="container mt-4">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card shadow-sm">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h4>Form Input Barang Masuk</h4>
+                        </div>
+                        <div class="card-body">
+                            <form action="<?= site_url('/submitBarangMasuk') ?>" method="POST">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="id_faktur" class="form-label">ID Faktur</label>
+                                            <input type="text" class="form-control" id="id_faktur" name="id_faktur" value="2025051504" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="supplier" class="form-label">Pilih Supplier</label>
+                                            <select class="form-select" id="supplier" name="supplier">
+                                                <option value="1">TOKO SEDJATI</option>
+                                                <option value="2">TOKO ABC</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="tanggal" class="form-label">Tanggal</label>
+                                            <input type="date" class="form-control" id="tanggal" name="tanggal" value="2025-01-01">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="status" class="form-label">Status</label>
+                                            <input type="text" class="form-control" id="status" name="status" value="LUNAS" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="jatuh_tempo" class="form-label">Tgl. Jatuh Tempo</label>
+                                            <input type="date" class="form-control" id="jatuh_tempo" name="jatuh_tempo" value="2025-02-15">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="total_belanja" class="form-label">Total Belanja</label>
+                                            <input type="number" class="form-control" id="total_belanja" name="total_belanja" value="300000">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="mb-3">
+                                            <label for="keterangan" class="form-label">Keterangan</label>
+                                            <textarea class="form-control" id="keterangan" name="keterangan" rows="3"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-end">
+                                    <button type="submit" class="btn btn-primary">Simpan</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
-</form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<?= $this->include('templates/footer'); ?>

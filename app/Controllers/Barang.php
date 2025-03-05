@@ -174,4 +174,6 @@ class Barang extends Controller
         // header('Content-Type: image/png');
         echo $barcode;
     }
+
+
 }
