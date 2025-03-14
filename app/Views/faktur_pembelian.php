@@ -74,11 +74,11 @@
                                     </button>
                                 </form>
 
-                                <form action="<?= base_url('/tambahFakturLama'); ?>">
+                                <!-- <form action="<?= base_url('/tambahFakturLama'); ?>">
                                     <button class="btn btn-warning btn-sm text-white" data-bs-toggle="modal" data-bs-target="#modalTambahFaktur">
                                         <i class="fas fa-plus"></i> Tambah Faktur Versi Lama
                                     </button>
-                                </form>
+                                </form> -->
                             </div>
                         </div>
                         <div class="card-body">
@@ -113,7 +113,7 @@
                                                             <input type="checkbox" class="form-check-input" id="lunasCheckbox">
                                                             <label for="lunasCheckbox" class="form-check-label">Lunas</label>
                                                         </div>
-                                                        <button type="button" class="btn btn-success btn-sm">
+                                                        <button type="button" class="btn btn-success btn-sm" onclick="window.location.href='<?= site_url('/kulakan/tambah') ?>'">
                                                             <i class="fas fa-plus"></i>
                                                         </button>
                                                         <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modalDetailFaktur<?= $f['id_faktur_beli']; ?>">

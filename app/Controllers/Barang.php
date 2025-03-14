@@ -10,6 +10,7 @@ use CodeIgniter\Controller;
 use CodeIgniter\I18n\Time;
 use Picqer\Barcode\BarcodeGeneratorPNG;
 
+
 class Barang extends Controller
 {
     protected $barangModel;
@@ -174,6 +175,8 @@ class Barang extends Controller
         // header('Content-Type: image/png');
         echo $barcode;
     }
+
+    
 
 
 }

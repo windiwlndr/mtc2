@@ -39,12 +39,22 @@
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label for="supplier" class="form-label">Pilih Supplier</label>
-                                            <select class="form-select" id="supplier" name="supplier">
-                                                <option value="1">TOKO SEDJATI</option>
-                                                <option value="2">TOKO ABC</option>
+                                            <select class="form-select" id="supplier" name="id_supplier">
+                                                <option value="">Pilih Supplier</option>
+                                                <?php foreach ($supplier as $s) : ?>
+                                                    <option value="<?= $s['id_supplier']; ?>"><?= $s['nama_supplier']; ?></option>
+                                                <?php endforeach; ?>
                                             </select>
                                         </div>
                                     </div>
+
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="nama_admin_pembelian" class="form-label">Nama Admin</label>
+                                            <input type="text" id="nama_admin_pembelian" name="nama_admin_pembelian" class="form-control" placeholder="Masukkan nama admin" required>
+                                        </div>
+                                    </div>
+
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label for="tanggal" class="form-label">Tanggal</label>
@@ -59,20 +69,28 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
+                                            <label for="ket_jatuh_tempo" class="form-label">Keterangan Jatuh Tempo</label>
+                                            <input type="text" class="form-control" id="ket_jatuh_tempo" name="ket_jatuh_tempo" placeholder="Masukkan keterangan jatuh tempo">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
                                             <label for="jatuh_tempo" class="form-label">Tgl. Jatuh Tempo</label>
                                             <input type="date" class="form-control" id="jatuh_tempo" name="jatuh_tempo" value="2025-02-15">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label for="total_belanja" class="form-label">Total Belanja</label>
-                                            <input type="number" class="form-control" id="total_belanja" name="total_belanja" value="300000">
+                                            <label for="total_pembelian" class="form-label">Total Pembelian</label>
+                                            <input type="number" class="form-control" id="total_pembelian" name="total_pembelian" value="300000" required>
                                         </div>
                                     </div>
-                                    <div class="col-12">
+
+                                    <div class="col-md-6">
                                         <div class="mb-3">
                                             <label for="keterangan" class="form-label">Keterangan</label>
-                                            <textarea class="form-control" id="keterangan" name="keterangan" rows="3"></textarea>
+                                            <input class="form-control" id="keterangan" name="keterangan"></input>
                                         </div>
                                     </div>
                                 </div>

@@ -56,7 +56,7 @@ class FakturBeli extends Controller
         } else {
             session()->setFlashdata('error', 'Gagal menambahkan faktur!');
         }
-        return redirect()->to(base_url('/fakturbeli'));
+        return redirect()->to(base_url('/faktur_pembelian'));
     }
 
     public function update()
