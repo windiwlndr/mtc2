@@ -62,28 +62,28 @@ $routes->post('/deleteFakturBeli', 'FakturBeli::delete');
 
 // tamah faktur
 $routes->post('/submitBarangMasuk', 'DetailFaktur::submitBarangMasuk');
-$routes->get('/fakturPembelian', 'DetailFaktur::index'); // Halaman Faktur Pembelian
+$routes->get('/fakturPembelian', 'DetailFaktur::index'); 
 
 $routes->get('/tambahFaktur', 'DetailFaktur::index');
 $routes->get('/tambahFakturLama', 'DetailFakturLama::index');
 
-$routes->get('/kulakan/tambah', 'Kulakan::tambah');  // Menampilkan form tambah barang
-$routes->post('/kulakan/simpan', 'Kulakan::simpan'); // Menyimpan data barang baru
+$routes->get('/kulakan/tambah', 'Kulakan::tambah');  
+$routes->post('/kulakan/simpan', 'Kulakan::simpan'); 
 
 
 // Kartu Stok
 $routes->get('kartu_stok', 'KartuStok::index');
 $routes->get('kartustok/create', 'KartuStok::create');
-$routes->post('kartustok/store', 'KartuStok::store');
+$routes->post('kartustok/add', 'KartuStok::create');
 $routes->post('/kartu_stok/update', 'KartuStok::update');
 $routes->get('detail_kartu_stok/(:num)', 'DetailKartuStok::detail/$1');
+$routes->post('/kartu_stok/delete', 'KartuStok::delete');
 
 // Detail Kartu Stok
 $routes->get('/detail_kartu_stok', 'DetailKartuStok::index');
 $routes->get('/detail_kartu_stok/tambah', 'DetailKartuStok::tambah');
-$routes->post('/detail_kartu_stok/store', 'DetailKartuStok::store');
+$routes->post('/detail_kartu_stok/add', 'DetailKartuStok::add');
 $routes->get('detail_kartu_stok/get_last_id', 'DetailKartuStok::get_last_id');
-
 $routes->post('/detail_kartu_stok/update', 'DetailKartuStok::update');
 $routes->post('/detail_kartu_stok/delete', 'DetailKartuStok::delete');
 

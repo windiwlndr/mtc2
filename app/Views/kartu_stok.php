@@ -55,7 +55,7 @@
                                                     <div class="d-flex gap-2">
                                                         <!-- Tombol Tambah Data -->
                                                         <button type="button" class="btn btn-success btn-sm"
-                                                            onclick="window.location.href='<?= site_url('/detail_kartu_stok/tambah?id_kartu_stok=' . ($id_kartu_stok ?? '')) ?>'">
+                                                            onclick="window.location.href='<?= site_url('/detail_kartu_stok/tambah?id_kartu_stok=' . ($item['id_kartu_stok'] ?? '')) ?>'">
                                                             <i class="fas fa-plus"></i>
                                                         </button>
 
@@ -136,7 +136,12 @@
                         <div class="modal-body">
                             <div class="mb-3">
                                 <label class="form-label">ID User</label>
-                                <input type="text" name="id_user" class="form-control" required>
+                                <select name="id_user" id="id_user" class="form-select" required>
+                                    <option value="">Pilih User</option>
+                                    <?php foreach ($user as $u) : ?>
+                                        <option value="<?= $u->id_user ?>"><?= $u->nama ?></option>
+                                    <?php endforeach; ?>
+                                </select>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Tanggal</label>

@@ -113,7 +113,7 @@
                                                             <input type="checkbox" class="form-check-input" id="lunasCheckbox">
                                                             <label for="lunasCheckbox" class="form-check-label">Lunas</label>
                                                         </div>
-                                                        <button type="button" class="btn btn-success btn-sm" onclick="window.location.href='<?= site_url('/kulakan/tambah') ?>'">
+                                                        <button type="button" class="btn btn-success btn-sm" onclick="window.location.href='<?= base_url('/kulakan/tambah') ?>'">
                                                             <i class="fas fa-plus"></i>
                                                         </button>
                                                         <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modalDetailFaktur<?= $f['id_faktur_beli']; ?>">

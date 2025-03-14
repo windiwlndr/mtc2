@@ -5,7 +5,7 @@
         <div class="sidebar-menu">
             <ul class="menu">
                 <li class="sidebar-title d-flex align-items-center">
-                    <img src="assets/images/logo/mtc.png" alt="Logo" style="width: 33px; height: 30px; margin-right: 8px;">
+                    <img src="<?= base_url(); ?>assets/images/logo/mtc.png" alt="Logo" style="width: 33px; height: 30px; margin-right: 8px;">
                     Madura Technovation
                 </li>
                 <li class="sidebar-item">

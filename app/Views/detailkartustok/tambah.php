@@ -35,7 +35,7 @@
                         </div>
                     <?php endif; ?>
 
-                    <form action="<?= base_url('detail_kartu_stok/save') ?>" method="post">
+                    <form action="<?= base_url('detail_kartu_stok/add') ?>" method="post">
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label for="id_kartu_stok" class="form-label">ID Kartu Stok</label>
