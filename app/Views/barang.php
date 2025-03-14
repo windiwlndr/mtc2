@@ -43,7 +43,7 @@
                                     </div>
                                 </div>
                                 <!-- end modal add -->
-                                <button class="btn btn-primary btn-sm">
+                                <button class="btn btn-primary btn-sm" onclick="printData()">
                                     <i class="fas fa-print"></i> Cetak Barang + Info Modal
                                 </button>
                                 <button class="btn btn-danger btn-sm">
@@ -52,9 +52,64 @@
                                 <button class="btn btn-warning btn-sm">
                                     <i class="fas fa-file-excel"></i> Import Excel
                                 </button>
-                                <button class="btn btn-secondary btn-sm">
+                                <button class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#detailBarangModal">
                                     <i class="fas fa-list"></i> Full Data
                                 </button>
+                                <!-- Modal Full Data -->
+                                <div class="modal fade" id="detailBarangModal" tabindex="-1" aria-labelledby="detailBarangModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-xl">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="detailBarangModalLabel">Full Data Barang</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover">
+                                                        <thead class="table-primary">
+                                                            <tr>
+                                                                <th>No</th>
+                                                                <th>ID Barang</th>
+                                                                <th>Nama Barang</th>
+                                                                <th>Satuan Jual</th>
+                                                                <th>Kategori</th>
+                                                                <th>Stok Real</th>
+                                                                <th>H. Jual Beli</th>
+                                                                <th>H. Jual Ecer</th>
+                                                                <th>H. Jual Member</th>
+                                                                <th>H. Grosir</th>
+                                                                <th>Diskon</th>
+                                                                <th>Rak</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <?php $no = 1;
+                                                            foreach ($barang as $b) : ?>
+                                                                <tr>
+                                                                    <td><?= $no++; ?></td>
+                                                                    <td><?= $b['id_barang']; ?></td>
+                                                                    <td><?= $b['nama_barang']; ?></td>
+                                                                    <td><?= $b['nama_satuan']; ?></td>
+                                                                    <td><?= $b['nama_kategori']; ?></td>
+                                                                    <td><?= $b['stok']; ?></td>
+                                                                    <td><?= number_format($b['harga_beli'], 2, ',', '.'); ?></td>
+                                                                    <td><?= number_format($b['harga_jual_normal'], 2, ',', '.'); ?></td>
+                                                                    <td><?= number_format($b['harga_jual_member'], 2, ',', '.'); ?></td>
+                                                                    <td><?= number_format($b['harga_jual_lv1'], 2, ',', '.'); ?></td>
+                                                                    <td><?= number_format($b['diskon_jual'], 2, ',', '.'); ?></td>
+                                                                    <td><?= $b['rak_barang']; ?></td>
+                                                                </tr>
+                                                            <?php endforeach; ?>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="card-body">
@@ -119,7 +174,7 @@
                                                             <li>
                                                                 <!-- <a class="dropdown-item" href="#"><i class="fas fa-barcode"></i> Barcode</a> -->
                                                                 <button type="button" data-bs-toggle="modal" data-bs-target="#barcodeModal<?= $b['id_barang']; ?>" class="dropdown-item"><i class="fas fa-barcode"></i> barcode</button>
-                                                           </li>
+                                                            </li>
                                                             <li>
                                                                 <hr class="dropdown-divider">
                                                             </li>
@@ -144,16 +199,16 @@
                                                     <!-- end modal edit -->
                                                     <!-- modal detail-->
                                                     <div class="modal fade" id="detailModal<?= $b['id_barang']; ?>" aria-labelledby="detailModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="detailModalLabel">Detail Barang</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <?= view('barang/detailBarang', ['b' => $b]); ?>
-        </div>
-    </div>
-</div>
+                                                        <div class="modal-dialog modal-dialog-centered">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="detailModalLabel">Detail Barang</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <?= view('barang/detailBarang', ['b' => $b]); ?>
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
                                                     <!-- end modal detail -->
                                                     <!-- modal barcode -->
@@ -196,6 +251,18 @@
                 Swal.fire("Gagal!", "<?= session()->getFlashdata('error'); ?>", "error");
             </script>
         <?php endif; ?>
+
+        <script>
+            function printData() {
+                var printContents = document.getElementById('barangTable').outerHTML;
+                var originalContents = document.body.innerHTML;
+                document.body.innerHTML = printContents;
+                window.print();
+                document.body.innerHTML = originalContents;
+                location.reload();
+            }
+        </script>
+
         <script>
             $(document).ready(function() {
                 $('#barangTable').DataTable({

@@ -36,4 +36,25 @@ class DetailFaktur extends BaseController
         ];
         return view('/faktur/formaddFaktur', $data);
     }
+
+    public function submitBarangMasuk()
+    {
+        // Ambil data dari form
+        $data = [
+            'id_faktur' => $this->request->getPost('id_faktur'),
+            'id_supplier' => $this->request->getPost('id_supplier'),
+            'nama_admin_pembelian' => $this->request->getPost('nama_admin_pembelian'),
+            'tanggal' => $this->request->getPost('tanggal'),
+            'status' => $this->request->getPost('status'),
+            'jatuh_tempo' => $this->request->getPost('jatuh_tempo'),
+            'total_pembelian' => $this->request->getPost('total_pembelian'),
+            'keterangan' => $this->request->getPost('keterangan'),
+        ];
+
+        // Simpan ke database
+        $this->detailFakturModel->insert($data);
+
+        // Redirect ke halaman Faktur Pembelian
+        return redirect()->to('/fakturPembelian')->with('success', 'Faktur berhasil disimpan.');
+    }
 }

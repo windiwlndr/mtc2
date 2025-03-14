@@ -59,6 +59,20 @@
                         <span>Faktur Pembelian</span>
                     </a>
                 </li>
+                <li class="sidebar-item">
+                    <a href="<?= base_url('kartu_stok'); ?>" class="sidebar-link">
+                        <i class="fa-solid fa-clipboard-list"></i>
+                        <span>Kartu Stok</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a href="<?= base_url('laci'); ?>" class="sidebar-link">
+                        <i class="fa-solid fa-cash-register"></i>
+                        <span>Laci Keuangan</span>
+                    </a>
+                </li>
+
             </ul>
         </div>
 

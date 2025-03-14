@@ -56,9 +56,39 @@ $routes->get('barang/generateBarcode/(:any)', 'Barang::generateBarcode/$1');
 
 // Faktur Beli
 $routes->get('/faktur_pembelian', 'FakturBeli::index');
+$routes->post('/submitBarangMasuk', 'FakturBeli::create');
 $routes->post('/updateFakturBeli', 'FakturBeli::update');
 $routes->post('/deleteFakturBeli', 'FakturBeli::delete');
 
 // tamah faktur
+$routes->post('/submitBarangMasuk', 'DetailFaktur::submitBarangMasuk');
+$routes->get('/fakturPembelian', 'DetailFaktur::index'); // Halaman Faktur Pembelian
+
 $routes->get('/tambahFaktur', 'DetailFaktur::index');
 $routes->get('/tambahFakturLama', 'DetailFakturLama::index');
+
+$routes->get('/kulakan/tambah', 'Kulakan::tambah');  // Menampilkan form tambah barang
+$routes->post('/kulakan/simpan', 'Kulakan::simpan'); // Menyimpan data barang baru
+
+
+// Kartu Stok
+$routes->get('kartu_stok', 'KartuStok::index');
+$routes->get('kartustok/create', 'KartuStok::create');
+$routes->post('kartustok/store', 'KartuStok::store');
+$routes->post('/kartu_stok/update', 'KartuStok::update');
+$routes->get('detail_kartu_stok/(:num)', 'DetailKartuStok::detail/$1');
+
+// Detail Kartu Stok
+$routes->get('/detail_kartu_stok', 'DetailKartuStok::index');
+$routes->get('/detail_kartu_stok/tambah', 'DetailKartuStok::tambah');
+$routes->post('/detail_kartu_stok/store', 'DetailKartuStok::store');
+$routes->get('detail_kartu_stok/get_last_id', 'DetailKartuStok::get_last_id');
+
+$routes->post('/detail_kartu_stok/update', 'DetailKartuStok::update');
+$routes->post('/detail_kartu_stok/delete', 'DetailKartuStok::delete');
+
+// laci keuangan
+$routes->get('/laci', 'Laci::index');
+$routes->post('/laci/store', 'Laci::store');
+$routes->post('/laci/update', 'Laci::update'); // Tambahkan ini
+$routes->post('/laci/update/(:num)', 'Laci::update/$1'); // Opsional jika ingin tetap ada
