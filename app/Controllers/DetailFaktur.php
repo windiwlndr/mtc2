@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Controllers\BaseController;
 use App\Models\SupplierModel;
 use App\Models\BarangModel;
 use App\Models\DetailFakturModel;
