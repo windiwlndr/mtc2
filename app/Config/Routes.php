@@ -60,7 +60,7 @@ $routes->post('/submitBarangMasuk', 'FakturBeli::create');
 $routes->post('/updateFakturBeli', 'FakturBeli::update');
 $routes->post('/deleteFakturBeli', 'FakturBeli::delete');
 
-// tamah faktur
+// tambah faktur
 $routes->post('/submitBarangMasuk', 'DetailFaktur::submitBarangMasuk');
 $routes->get('/fakturPembelian', 'DetailFaktur::index'); 
 
@@ -92,3 +92,19 @@ $routes->get('/laci', 'Laci::index');
 $routes->post('/laci/store', 'Laci::store');
 $routes->post('/laci/update', 'Laci::update'); // Tambahkan ini
 $routes->post('/laci/update/(:num)', 'Laci::update/$1'); // Opsional jika ingin tetap ada
+
+
+// History Stok
+$routes->get('/historystok', 'HistoryStok::index');
+$routes->post('/historystok/create', 'HistoryStok::create');
+$routes->post('/historystok/update', 'HistoryStok::update');
+$routes->post('/historystok/delete', 'HistoryStok::delete');
+
+// Faktur Keluaran
+$routes->get('/fakturkeluaran', 'FakturKeluaran::index');
+$routes->post('/fakturkeluaran/create', 'FakturKeluaran::create');
+$routes->post('/fakturkeluaran/update', 'FakturKeluaran::update');
+$routes->post('/fakturkeluaran/delete', 'FakturKeluaran::delete');
+
+$routes->get('/rincian/tambah', 'Rincian::tambah');  
+$routes->post('/rincian/simpan', 'Rincian::simpan'); 

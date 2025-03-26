@@ -73,6 +73,21 @@
                     </a>
                 </li>
 
+                <li class="sidebar-item">
+                    <a href="<?= base_url('historystok'); ?>" class="sidebar-link">
+                        <i class="fa-solid fa-boxes-stacked"></i>
+                        <span>History Stok</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="<?= base_url('fakturkeluaran'); ?>" class="sidebar-link">
+                        <i class="fa-solid fa-receipt"></i>
+                        <span>Faktur Keluaran</span>
+                    </a>
+                </li>
+
+
+
             </ul>
         </div>
 

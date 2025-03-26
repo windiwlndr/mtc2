@@ -74,11 +74,7 @@
                                     </button>
                                 </form>
 
-                                <!-- <form action="<?= base_url('/tambahFakturLama'); ?>">
-                                    <button class="btn btn-warning btn-sm text-white" data-bs-toggle="modal" data-bs-target="#modalTambahFaktur">
-                                        <i class="fas fa-plus"></i> Tambah Faktur Versi Lama
-                                    </button>
-                                </form> -->
+
                             </div>
                         </div>
                         <div class="card-body">
@@ -132,7 +128,6 @@
                                                                     <h5 class="modal-title" id="modalDetailFakturLabel">Detail Faktur</h5>
                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
-                                                                <?= view('fakturlama/detailFaktur', ['f' => $f]); ?>
                                                             </div>
                                                         </div>
                                                     </div>

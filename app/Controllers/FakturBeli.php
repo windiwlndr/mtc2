@@ -94,4 +94,13 @@ class FakturBeli extends Controller
 
         return redirect()->to(base_url('/merk'));
     }
+
+    public function tambahKulakan()
+    {
+        $data = [
+            'title' => 'Tambah Barang Kulakan',
+            'barang' => $this->barangModel->findAll()
+        ];
+        return view('faktur/kulakan_tambah', $data);
+    }
 }

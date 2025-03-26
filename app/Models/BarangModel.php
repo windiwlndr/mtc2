@@ -42,7 +42,14 @@ class BarangModel extends Model
     public function getBarang()
     {
         return $this->select('tb_barang.*, tb_merk.nama_merk as merk')
-                    ->join('tb_merk', 'tb_barang.id_merk = tb_merk.id_merk', 'left')
-                    ->findAll();
+            ->join('tb_merk', 'tb_barang.id_merk = tb_merk.id_merk', 'left')
+            ->findAll();
+    }
+
+    public function searchBarang($query)
+    {
+        return $this->like('id_barang', $query)
+            ->orLike('nama_barang', $query)
+            ->findAll();
     }
 }

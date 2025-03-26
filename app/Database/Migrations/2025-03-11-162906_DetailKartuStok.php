@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class CreateTbDetailKartuStok extends Migration
+class DetailKartuStok extends Migration
 {
     public function up()
     {
@@ -63,7 +63,7 @@ class CreateTbDetailKartuStok extends Migration
         $this->forge->addKey('id_detail_kartu_stok', true);
         $this->forge->createTable('tb_detail_kartu_stok');
         $this->forge->addForeignKey('id_kartu_stok', 'tb_kartu_stok', 'id_kartu_stok', 'CASCADE', 'CASCADE');
-
+        
     }
 
     public function down()

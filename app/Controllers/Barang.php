@@ -176,7 +176,18 @@ class Barang extends Controller
         echo $barcode;
     }
 
-    
+    public function list()
+    {
+        $query = $this->request->getGet('query');
+        $barangModel = new BarangModel();
+        $result = $barangModel->searchBarang($query);
+        return $this->response->setJSON($result);
+    }
 
-
+    public function detail($id_barang)
+    {
+        $barangModel = new BarangModel();
+        $barang = $barangModel->find($id_barang);
+        return $this->response->setJSON($barang);
+    }
 }
