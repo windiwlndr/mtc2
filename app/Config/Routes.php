@@ -50,6 +50,9 @@ $routes->post('/deleteBarang', 'Barang::delete');
 $routes->post('/createBarang', 'Barang::create');
 $routes->get('/barcode/(:num)', 'Barang::showBarcode/$1');
 $routes->get('barang/generateBarcode/(:any)', 'Barang::generateBarcode/$1');
+// $routes->get('/barang/search', 'Kulakan::search');
+$routes->get('/barang/search', 'Barang::search');
+
 // $routes->get('/barang/detail/(:num)', 'BarangController::detail/$1');
 
 
@@ -63,7 +66,6 @@ $routes->post('/deleteFakturBeli', 'FakturBeli::delete');
 // tambah faktur
 $routes->post('/submitBarangMasuk', 'DetailFaktur::submitBarangMasuk');
 $routes->get('/fakturPembelian', 'DetailFaktur::index'); 
-
 $routes->get('/tambahFaktur', 'DetailFaktur::index');
 $routes->get('/tambahFakturLama', 'DetailFakturLama::index');
 
@@ -83,6 +85,7 @@ $routes->post('/kartu_stok/delete', 'KartuStok::delete');
 $routes->get('/detail_kartu_stok', 'DetailKartuStok::index');
 $routes->get('/detail_kartu_stok/tambah', 'DetailKartuStok::tambah');
 $routes->post('/detail_kartu_stok/add', 'DetailKartuStok::add');
+$routes->get('/detail_kartu_stok/detail', 'DetailKartuStok::detail');
 $routes->get('detail_kartu_stok/get_last_id', 'DetailKartuStok::get_last_id');
 $routes->post('/detail_kartu_stok/update', 'DetailKartuStok::update');
 $routes->post('/detail_kartu_stok/delete', 'DetailKartuStok::delete');
@@ -94,11 +97,11 @@ $routes->post('/laci/update', 'Laci::update'); // Tambahkan ini
 $routes->post('/laci/update/(:num)', 'Laci::update/$1'); // Opsional jika ingin tetap ada
 
 
-// History Stok
-$routes->get('/historystok', 'HistoryStok::index');
-$routes->post('/historystok/create', 'HistoryStok::create');
-$routes->post('/historystok/update', 'HistoryStok::update');
-$routes->post('/historystok/delete', 'HistoryStok::delete');
+// History 
+$routes->get('/history', 'History::index');
+$routes->post('/history/create', 'History::create');
+$routes->post('/history/update', 'History::update');
+$routes->post('/history/delete', 'History::delete');
 
 // Faktur Keluaran
 $routes->get('/fakturkeluaran', 'FakturKeluaran::index');

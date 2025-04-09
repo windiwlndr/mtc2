@@ -60,7 +60,7 @@
                                     <?php foreach ($laci as $item) : ?>
                                         <tr>
                                             <td><?= $item['id_laci'] ?></td>
-                                            <td><?= $item['id_user'] ?></td>
+                                            <td><?= $item['nama_user'] ?></td>
                                             <td><?= $item['waktu_login'] ?></td>
                                             <td><?= $item['shift'] ?></td>
                                             <td><?= number_format($item['uang_modal'], 2, ',', '.') ?></td>

@@ -21,8 +21,13 @@ class KartuStok extends Controller
     {
         $data = [
             'title' => 'Kasir || Kartu Stok',
-            'kartu_stok' => $this->kartuStokModel->findAll(),
+            'kartu_stok' => $this->db->table('tb_kartu_stok')
+            ->select('tb_kartu_stok.*, user.nama as nama_user') 
+            ->join('user', 'user.id_user = tb_kartu_stok.id_user', 'left') 
+            ->get()
+            ->getResultArray(),
             'user' => $this->db->table('user')->get()->getResult(),
+            
         ];
         return view('kartu_stok', $data);
     }
@@ -67,23 +72,11 @@ class KartuStok extends Controller
         $data = [
             'title' => 'Detail Kartu Stok',
             'kartu_stok' => $this->kartuStokModel->find($id),
-        ];
-
-        if (!$data['kartu_stok']) {
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound("Data tidak ditemukan.");
-        }
+        ];   
 
         return view('detail_kartu_stok', $data);
     }
 
-    // public function detail($id)
-    // {
-    //     $data = [
-    //         'title' => 'Kasir || Detail Kartu Stok',
-    //         'detail_kartu_stok' => $this->DetailKartuStokModel->findAll(),
-    //     ];
-    //     return view('detail_kartu_stok', $data);
-    // }
 
     public function delete()
     {

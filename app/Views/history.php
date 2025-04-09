@@ -7,13 +7,13 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h3>Data History Stok</h3>
+                    <h3>Data History</h3>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="index.html">Data Master</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Data History Stok</li>
+                            <li class="breadcrumb-item active" aria-current="page">Data History</li>
                         </ol>
                     </nav>
                 </div>
@@ -32,7 +32,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table id="historyStokTable" class="table table-hover">
+                                <table id="historyTable" class="table table-hover">
                                     <thead class="table-primary">
                                         <tr>
                                             <th>No</th>
@@ -53,8 +53,8 @@
                                             <tr>
                                                 <td><?= $no++ ?></td>
                                                 <td><?= $item['tanggal_history'] ?></td>
-                                                <td><?= $item['id_user'] ?></td>
-                                                <td><?= $item['id_barang'] ?></td>
+                                                <td><?= $item['nama_user'] ?></td>
+                                                <td><?= $item['barcode'] ?></td>
                                                 <td>
                                                     <?php
                                                     $index = array_search($item['id_barang'], array_column($barang, 'id_barang'));
@@ -66,17 +66,6 @@
                                                 <td><?= $item['stok_awal'] ?></td>
                                                 <td><?= $item['stok_akhir'] ?></td>
                                                 <td><?= $item['keterangan'] ?></td>
-                                                <!-- <td>
-                                                    <div class="d-flex">
-                                                        <button type="button" data-bs-toggle="modal" data-bs-target="#editModal<?= $item['id_history_stok'] ?>" class="btn btn-sm btn-warning me-2">
-                                                            <i class="fas fa-edit"></i> Edit
-                                                        </button>
-                                                        <form action="<?= base_url('/kartustok/delete'); ?>" method="post">
-                                                            <input type="hidden" name="id_history_stok" value="<?= $item['id_history_stok']; ?>">
-                                                            <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Hapus</button>
-                                                        </form>
-                                                    </div>
-                                                </td> -->
                                             </tr>
                                         <?php endforeach; ?>
                                     </tbody>
@@ -93,7 +82,7 @@
 
         <script>
             $(document).ready(function() {
-                $('#historyStokTable').DataTable({
+                $('#historyTable').DataTable({
                     "dom": '<"d-flex justify-content-between align-items-center mb-3"l f>rt<"d-flex justify-content-between align-items-center mt-3"ip>',
                     "language": {
                         "lengthMenu": "Show _MENU_ entries",
@@ -109,7 +98,7 @@
             });
 
             $(document).ready(function() {
-                $('#historyStokTable').DataTable();
+                $('#historyTable').DataTable();
 
                 
             });

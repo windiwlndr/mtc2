@@ -74,9 +74,9 @@
                 </li>
 
                 <li class="sidebar-item">
-                    <a href="<?= base_url('historystok'); ?>" class="sidebar-link">
+                    <a href="<?= base_url('history'); ?>" class="sidebar-link">
                         <i class="fa-solid fa-boxes-stacked"></i>
-                        <span>History Stok</span>
+                        <span>History</span>
                     </a>
                 </li>
                 <li class="sidebar-item">

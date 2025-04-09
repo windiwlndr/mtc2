@@ -14,8 +14,7 @@ class DetailKartuStok extends BaseController
     protected $id_kartu_stok;
 
     public function __construct()
-    {
-        // HAPUS parent::__construct(); TIDAK DIPERLUKAN
+    {           
         $this->detailKartuStokModel = new DetailKartuStokModel();
         $this->db = \Config\Database::connect();
         $this->kartuStokModel = new KartuStokModel();
@@ -30,13 +29,28 @@ class DetailKartuStok extends BaseController
         return view('detail_kartu_stok', $data);
     }
 
-    public function detail($id)
-    {
-        $id_kartu_stok = $this->request->getGet('id_kartu_stok') ?? $id;
+    public function detail()
+    {        
+        $id_kartu_stok = $this->request->getGet('id_kartu_stok');
         $data = [
-            'details' => $this->detailKartuStokModel->where('id_kartu_stok', $id_kartu_stok)->findAll(),
+            'detail_kartu_stok' => $this->db->table('tb_detail_kartu_stok')
+            ->select('tb_detail_kartu_stok.*, tb_barang.nama_barang, user.nama as nama_user')
+            ->join('tb_barang', 'tb_barang.id_barang = tb_detail_kartu_stok.id_barang', 'left') 
+            ->join('user', 'user.id_user = tb_detail_kartu_stok.id_user', 'left') 
+            ->where('tb_detail_kartu_stok.id_kartu_stok', $id_kartu_stok)
+            ->get()
+            ->getResultArray(),
             'id_kartu_stok' => $id_kartu_stok
         ];
+        
+        if (!$id_kartu_stok) {
+            return redirect()->to('/')->with('error', 'ID Kartu Stok tidak ditemukan.');
+        }
+
+        if (!$data['detail_kartu_stok']) {
+            return redirect()->to('/')->with('error', 'Data tidak ditemukan.');
+        }
+            
         return view('detail_kartu_stok', $data);
     }
 
@@ -139,17 +153,6 @@ class DetailKartuStok extends BaseController
             session()->setFlashdata('error', 'Gagal memperbarui data.');
             return redirect()->back();
         }
-    }
-
-    public function create()
-    {
-        $data = [
-            'kartu_stok' => $this->db->table('tb_kartu_stok')->get()->getResult(),
-            'user' => $this->db->table('user')->get()->getResult(),
-            'barang' => $this->db->table('tb_barang')->get()->getResult()
-        ];
-
-        return view('detail_kartu_stok_form', $data);
     }
 
     public function delete()

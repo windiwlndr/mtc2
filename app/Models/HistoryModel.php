@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class HistoryStokModel extends Model
+class HistoryModel extends Model
 {
     protected $table = 'tb_history_stok';
     protected $primaryKey = 'id_history_stok';

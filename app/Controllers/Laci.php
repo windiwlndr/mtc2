@@ -8,17 +8,23 @@ use CodeIgniter\Controller;
 class Laci extends Controller
 {
     protected $laciModel;
+    protected $db;
 
     public function __construct()
     {
         $this->laciModel = new LaciModel();
+        $this->db = \Config\Database::connect();
     }
 
     public function index()
     {
         $data = [
             'title' => 'Laci Keuangan',
-            'laci' => $this->laciModel->findAll(),
+            'laci' => $this->db->table('tb_laci')
+            ->select('tb_laci.*, user.nama as nama_user')
+            ->join('user', 'user.id_user = tb_laci.id_user', 'left') 
+            ->get()
+            ->getResultArray(),
         ];
         return view('laci', $data);
     }

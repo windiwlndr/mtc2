@@ -33,7 +33,7 @@
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label for="id_faktur" class="form-label">ID Faktur</label>
-                                            <input type="text" class="form-control" id="id_faktur" name="id_faktur" value="2025051504" readonly>
+                                            <input type="text" class="form-control" id="id_faktur" name="id_faktur" value="<?= rand(1000000000, 999999999999); ?>" readonly>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -95,6 +95,7 @@
                                     </div>
                                 </div>
                                 <div class="text-end">
+                                    <a href="<?= base_url('faktur_pembelian') ?>" class="btn btn-secondary">Kembali</a>
                                     <button type="submit" class="btn btn-primary">Simpan</button>
                                 </div>
                             </form>

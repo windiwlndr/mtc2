@@ -38,7 +38,7 @@
                                     <i class="fas fa-box text-success fs-3 me-3"></i>
                                     <div>
                                         <div class="card-title text-muted">Jumlah Produk</div>
-                                        <div class="fw-bold fs-5">80.000</div>
+                                        <div class="fw-bold fs-5"><?= number_format($jumlahBarang, 0, ',', '.') ?></div>
                                     </div>
                                 </div>
                             </div>
@@ -47,7 +47,7 @@
                                     <i class="fas fa-users text-danger fs-3 me-3"></i>
                                     <div>
                                         <div class="card-title text-muted">Jumlah Member</div>
-                                        <div class="fw-bold fs-5">112</div>
+                                        <div class="fw-bold fs-5"><?= number_format($jumlahUser, 0, ',', '.') ?></div>
                                     </div>
                                 </div>
                             </div>

@@ -38,6 +38,7 @@ class DetailFaktur extends BaseController
 
     public function submitBarangMasuk()
     {
+        
         // Ambil data dari form
         $data = [
             'id_faktur' => $this->request->getPost('id_faktur'),

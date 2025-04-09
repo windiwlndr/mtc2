@@ -30,33 +30,23 @@
                 <div class="mb-3">
                     <label for="search_barang" class="form-label fw-bold">ID Barang / Nama Barang:</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" id="search_barang" placeholder="Masukkan ID Barang atau Nama Barang" list="barang-list">
+                        <input type="text" id="search_barang" class="form-control" placeholder="Cari barang berdasarkan nama atau barcode" autofocus>
                         <button class="btn btn-success" id="btn_cari">Cari</button>
                     </div>
                     <datalist id="barang-list"></datalist>
                 </div>
 
-                <div class="table-responsive">
-                    <table id="table_barang" class="table table-hover">
-                        <thead class="table-primary">
-                            <tr>
-                                <th>ID Barang</th>
-                                <th>Nama Barang</th>
-                                <th>Stok</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-
                 <div class="row mt-4">
                     <div class="col-md-5">
                         <h5>Data Pembelian Barang</h5>
-                        <form id="form_barang">
+                        <form id="form_barang" action="<?= base_url('kulakan/simpan') ?>" method="post">
                             <div class="mb-3">
                                 <label class="form-label">ID Barang</label>
                                 <input type="text" id="id_barang" class="form-control" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Kode Barang</label>
+                                <input type="text" id="kode_barang" class="form-control" readonly>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Nama Barang</label>
@@ -118,59 +108,74 @@
 </div>
 
 
-    <script>
-        $(document).ready(function() {
-            let dataBarang = [
-                { id: "123", nama: "Barang 1", stok: 50 },
-                { id: "456", nama: "Barang 2", stok: 30 }
-            ];
+<script>
 
-            // Isi datalist dengan format ID - Nama Barang
-            let datalist = $('#barang-list');
-            dataBarang.forEach(b => {
-                datalist.append(`<option value="${b.id} - ${b.nama}">`);
-            });
+</script>
+<script>
+    let barangDipilih = null;
 
-            // Event untuk tombol "Cari"
-            $('#btn_cari').on('click', function() {
-                let inputVal = $('#search_barang').val().trim().toLowerCase();
-                if (inputVal === "") return alert("Masukkan ID atau Nama Barang!");
-
-                let foundBarang = dataBarang.find(b => b.id === inputVal || b.nama.toLowerCase() === inputVal);
-
-                if (foundBarang) {
-                    $('#table_barang tbody').html(`
-                        <tr>
-                            <td>${foundBarang.id}</td>
-                            <td>${foundBarang.nama}</td>
-                            <td>${foundBarang.stok}</td>
-                            <td><button class='btn btn-primary btn_pilih' data-id='${foundBarang.id}'>Pilih</button></td>
-                        </tr>
-                    `);
-                } else {
-                    $('#table_barang tbody').html('<tr><td colspan="4" class="text-center text-danger">Barang tidak ditemukan</td></tr>');
+    $('#search_barang').autocomplete({
+        source: function(request, response) {
+            $.ajax({
+                url: "<?= base_url('barang/search') ?>",
+                dataType: "json",
+                data: {
+                    term: request.term
+                },
+                success: function(data) {
+                    response(data);
                 }
             });
+        },
+        select: function(event, ui) {
+            barangDipilih = ui.item;
+            $('#id_barang').val(ui.item.id);
+            $('#kode_barang').val(ui.item.barcode);
+            $('#nama_barang').val(ui.item.nama_barang);
+            $('#harga_kulak').val(ui.item.harga_beli);
+            $('#harga_jual').val(ui.item.harga_jual_normal);
+            $('#harga_level_1').val(ui.item.harga_jual_lv1);
+            $('#harga_level_2').val(ui.item.harga_jual_lv2);
+            $('#expired').val(ui.item.expired_barang);
+        },
+        minLength: 2
+    });
 
-            // Event untuk memilih barang dari tabel
-            $(document).on('click', '.btn_pilih', function() {
-                let barangId = $(this).data('id');
-                let barang = dataBarang.find(b => b.id === barangId);
 
-                if (barang) {
-                    $('#id_barang').val(barang.id);
-                    $('#nama_barang').val(barang.nama);
-                }
-            });
+    // Tambahkan ke tabel kulakan
+    $('#form_barang').on('submit', function(e) {
+        e.preventDefault();
+        // console.log(ui.item);
 
-            // Event untuk submit form
-            $('#form_barang').on('submit', function(e) {
-                e.preventDefault();
-                alert("Data berhasil disimpan!");
-                $('#form_barang')[0].reset();
-            });
-        });
-    </script>
+        let no = $('#fakturTable2 tbody tr').length + 1;
+        let jumlah = $('#jumlah_kulakan').val();
+        if (!barangDipilih || jumlah == "") {
+            alert("Pilih barang dan isi jumlah terlebih dahulu");
+            return;
+        }
+
+        $('#fakturTable2 tbody').append(`
+            <tr>
+                <td>${no}</td>
+                <td>${barangDipilih.barcode}</td>
+                <td>${barangDipilih.nama_barang}</td>
+                <td>${jumlah}</td>
+                <td>${$('#expired').val()}</td>
+                <td><button class="btn btn-danger btn-sm btn-hapus">Hapus</button></td>
+            </tr>
+        `);
+
+        $('#form_barang')[0].reset();
+        barangDipilih = null;
+    });
+
+    // Hapus baris dari tabel kulakan
+    $(document).on('click', '.btn-hapus', function() {
+        $(this).closest('tr').remove();
+    });
+</script>
+
+
 </div>
 
-<?= $this->include('templates/footer'); ?>          
+<?= $this->include('templates/footer'); ?>

@@ -13,7 +13,8 @@
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">Data Master</a></li>
+                            <li class="breadcrumb-item"><a href="#">Data Master</a></li>
+                            <li class="breadcrumb-item active" aria-current="page"><a href="<?= base_url('/kartu_stok'); ?>">Kartu Stok</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Detail Kartu Stok</li>
                         </ol>
                     </nav>
@@ -35,9 +36,9 @@
                                 <table id="detailKartuStokTable" class="table table-hover">
                                     <thead class="table-primary">
                                         <tr>
-                                            <th>ID</th>
-                                            <th>ID User</th>
-                                            <th>ID Barang</th>
+                                            <th>No</th>
+                                            <th> User</th>
+                                            <th> Barang</th>
                                             <th>Stok Awal</th>
                                             <th>Stok Cek</th>
                                             <th>Validasi</th>
@@ -49,11 +50,13 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach ($detail_kartu_stok as $data): ?>
+                                        <?php 
+                                        $no = 1;
+                                        foreach ($detail_kartu_stok as $data): ?>
                                             <tr>
-                                                <td><?= $data['id_detail_kartu_stok']; ?></td>
-                                                <td><?= $data['id_user']; ?></td>
-                                                <td><?= $data['id_barang']; ?></td>
+                                                <td><?= $no++?></td>
+                                                <td><?= $data['nama_user']; ?></td>
+                                                <td><?= $data['nama_barang']; ?></td>
                                                 <td><?= $data['stok_awal']; ?></td>
                                                 <td><?= $data['stok_cek']; ?></td>
                                                 <td><?= $data['validasi']; ?></td>
@@ -157,7 +160,7 @@
                         <div class="modal-body">
                             <div class="mb-3">
                                 <label class="form-label">ID User</label>
-                                <input type="text" name="id_user" class="form-control" required>
+                                <input type="text" name="namauser" class="form-control" required>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">ID Barang</label>

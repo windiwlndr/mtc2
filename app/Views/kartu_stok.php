@@ -35,7 +35,7 @@
                                     <thead class="table-primary">
                                         <tr>
                                             <th>No</th>
-                                            <th>ID Kartu Stok</th>
+                                            <!-- <th>ID Kartu Stok</th> -->
                                             <th>ID User</th>
                                             <th>Tanggal</th>
                                             <th>Catatan</th>
@@ -46,9 +46,8 @@
                                         <?php $no = 1;
                                         foreach ($kartu_stok as $item): ?>
                                             <tr>
-                                                <td><?= $no++ ?></td>
-                                                <td><?= $item['id_kartu_stok'] ?></td>
-                                                <td><?= $item['id_user'] ?></td>
+                                                <td><?= $no++ ?></td>                                                
+                                                <td><?= $item['nama_user'] ?></td>
                                                 <td><?= $item['tgl_kartu'] ?></td>
                                                 <td><?= $item['catatan'] ?></td>
                                                 <td>
@@ -59,8 +58,8 @@
                                                             <i class="fas fa-plus"></i>
                                                         </button>
 
-                                                        <!-- Tombol Detail Faktur -->
-                                                        <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modalDetailKartuStok<?= $item['id_kartu_stok']; ?>">
+                                                        <!-- Tombol Detail stok -->
+                                                        <button type="button" class="btn btn-warning btn-sm" onclick="window.location.href='<?= site_url('/detail_kartu_stok/detail?id_kartu_stok=' . ($item['id_kartu_stok'] ?? '')) ?>'">                                                        
                                                             <i class="fas fa-search"></i>
                                                         </button>
 

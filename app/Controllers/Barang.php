@@ -84,6 +84,24 @@ class Barang extends Controller
         }
 
         if ($this->barangModel->insert($data)) {
+            // Ambil ID barang terakhir yang baru disimpan
+            $id_barang = $this->barangModel->getInsertID();
+
+            // Catat history stok awal
+            $idUser = 2;
+            $stok_awal = 0;
+            $stok_akhir = (int) $this->request->getPost('stok');
+
+            $historyModel = new \App\Models\HistoryModel();
+            $historyModel->save([
+                'tanggal_history' => date('Y-m-d H:i:s'),
+                'id_user' => $idUser, // pastikan id_user tersimpan saat login
+                'id_barang' => $id_barang,
+                'jumlah' => $stok_akhir,
+                'stok_awal' => $stok_awal,
+                'stok_akhir' => $stok_akhir,
+                'keterangan' => 'Barang baru ditambahkan',
+            ]);
             session()->setFlashdata('success', 'Data berhasil ditambahkan!');
             return redirect()->to(base_url('/barang'))->with('success', 'Data berhasil ditambahkan');
         } else {
@@ -133,6 +151,24 @@ class Barang extends Controller
         }
 
         if ($this->barangModel->updateBarang($id, $data)) {
+            // Ambil ID barang terakhir yang baru disimpan
+            $id_barang = $id;
+
+            // Catat history stok awal
+            $idUser = 2;
+            $stok_awal = $barang['stok'];
+            $stok_akhir = $this->request->getPost('stok');
+
+            $historyModel = new \App\Models\HistoryModel();
+            $historyModel->save([
+                'tanggal_history' => date('Y-m-d H:i:s'),
+                'id_user' => $idUser, // pastikan id_user tersimpan saat login
+                'id_barang' => $id_barang,
+                'jumlah' => $stok_akhir,
+                'stok_awal' => $stok_awal,
+                'stok_akhir' => $stok_akhir,
+                'keterangan' => 'Update data barang',
+            ]);
             session()->setFlashdata('success', 'Data berhasil diperbarui!');
             return redirect()->to(base_url('/barang'));
         } else {
@@ -190,4 +226,32 @@ class Barang extends Controller
         $barang = $barangModel->find($id_barang);
         return $this->response->setJSON($barang);
     }
+
+    public function search()
+{
+    $term = $this->request->getGet('term');
+    $barang = $this->barangModel
+        ->like('nama_barang', $term)
+        ->orLike('barcode', $term)
+        ->findAll(10);
+
+    $data = [];
+    foreach ($barang as $b) {
+        $data[] = [
+            'label' => $b['nama_barang'],
+            'value' => $b['nama_barang'], 
+            'id' => $b['id_barang'],
+            'barcode' => $b['barcode'],
+            'nama_barang' => $b['nama_barang'],
+            'harga_beli' => $b['harga_beli'],
+            'harga_jual_normal' => $b['harga_jual_normal'],
+            'harga_jual_lv1' => $b['harga_jual_lv1'],
+            'harga_jual_lv2' => $b['harga_jual_lv2'],
+            'expired_barang' => $b['expired_barang'],
+        ];
+    }
+
+    return $this->response->setJSON($data);
+}
+
 }
